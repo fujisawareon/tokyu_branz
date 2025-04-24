@@ -1,0 +1,539 @@
+
+:root {
+  --manager-main-color: #001C51;
+  --manager-hover-color: #e5f0ff;
+  --header-height: 50px;
+}
+
+.header {
+  border-bottom: solid 1px var(--manager-main-color);
+  height: var(--header-height);
+
+  & .logo {
+    font-family: Serif, serif;
+    color: var(--manager-main-color);
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.flex-start-center {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-end-center {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+// ボタン
+.btn {
+  padding: .5rem 1rem;
+  white-space: nowrap;
+  background: var(--manager-main-color);
+  color: white;
+  border: solid 1px var(--manager-main-color);
+  border-radius: .25rem;
+  cursor: pointer;
+  transition: .2s;
+
+  &.min {
+    padding: .1rem .5rem;
+  }
+
+  &:hover {
+    background: white;
+    color: var(--manager-main-color);
+  }
+
+  &.color-red {
+    background: red;
+    color: white;
+    border: solid 1px red;
+
+    &:hover {
+      background: white;
+      color: red;
+    }
+  }
+
+  &.color-gray {
+    background: gray;
+    color: white;
+    border: solid 1px gray;
+
+    &:hover {
+      background: white;
+      color: #464646;
+    }
+  }
+
+}
+
+// リンク
+a.link {
+  color: var(--manager-main-color);
+  position: relative;
+  display: inline-block;
+  transition: .2s;
+  text-decoration: underline;
+
+  &:after {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    content: "";
+    width: 0;
+    height: 3px;
+    background-color: var(--manager-main-color);
+    transition: .1s;
+    transform: translate(-50%);
+  }
+
+  &:hover:after {
+    width: calc(100% + 10px);
+  }
+}
+
+// 項目を行で表示する要素
+.item-row {
+  margin-bottom: .5rem;
+  border-bottom: solid 1px #dce8ff;
+  display: flex;
+
+  & > .item-row-title {
+    position: relative;
+    width: 200px;
+    background: #dce8ff;
+    padding: .5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.require:after {
+      content: "必須";
+      margin-left: .5rem;
+      padding: .1rem .25rem;
+      font-size: .8rem;
+      background: red;
+      color: white;
+      border-radius: .25rem;
+    }
+  }
+
+  & .item-row-content {
+    padding: .25rem;
+    flex: 1;
+  }
+}
+
+// ページネーション
+span.current-page {
+  background: var(--manager-main-color);
+  color: white;
+}
+
+// 一覧テーブル
+.list-tbl {
+  width: 100%;
+  background: white;
+
+  & th, td {
+    border: solid 1px #b1b1b1;
+    padding: .25rem .5rem;
+    white-space: nowrap;
+  }
+
+  & th {
+    background: var(--manager-main-color);
+    color: white;
+  }
+
+  & td {
+    background: white;
+  }
+
+  & > .list-tbl-header {
+    background: var(--manager-main-color);
+    color: white;
+  }
+
+  & .list-tbl-row {
+    display: flex;
+    border-bottom: solid 1px #888;
+    border-right: solid 1px #888;
+  }
+
+  tr:nth-child(even) {
+    background-color: #ebf3ff;
+    & td {
+      background: #ebf3ff;
+    }
+  }
+
+  & tr.gray-out {
+    & td {
+      background: #a0a0a0;
+    }
+  }
+
+}
+
+// 一覧テーブル(tableではなく要素で作成する場合)
+.list-element {
+  width: 100%;
+
+  & .list-element-header {
+    background: var(--manager-main-color);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+
+    & > .list-tbl-row > div {
+      text-align: center;
+    }
+  }
+
+  & .list-element-row {
+    display: flex;
+    border-bottom: solid 1px #888;
+    border-right: solid 1px #888;
+
+    & > div {
+      padding: .25rem;
+      border-left: solid 1px #888;
+    }
+  }
+
+}
+
+.list-tbl-container {
+  width: 100%;
+  max-height: 600px; // スクロールを適用
+  overflow: auto; // 上下・左右スクロールを有効化
+  position: relative;
+  -ms-overflow-style: none;  /* IE, Edge 用 */
+  scrollbar-width: none;      /* Firefox 用 */
+}
+
+
+
+// インプット要素
+.input-box {
+  padding: .5rem .5rem;
+  border: solid 1px #ddd;
+  border-radius: .25rem;
+
+  &::placeholder {
+    color: #ddd;
+  }
+
+  &.error {
+    border-color: red;
+  }
+
+  &:disabled {
+    background: #eee; /* 薄いグレー */
+    cursor: not-allowed; /* カーソルを禁止マークに */
+  }
+}
+
+select.input-box {
+  padding: .25rem .5rem;
+  appearance: none;
+}
+
+
+select.dt-input {
+  padding: .5rem 2rem .5rem .25rem!important;
+  appearance: none;
+}
+
+
+
+// ラジオボタンのスタイル
+.custom-radio {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: .2s;
+
+  /* デフォルトのラジオボタンを非表示に */
+  & input[type="radio"] {
+    display: none;
+  }
+
+  /* カスタムラジオボタン */
+  & .radio-mark {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--manager-main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+  }
+
+  /* 選択されたときのスタイル */
+  & input[type="radio"]:checked + .radio-mark {
+    background-color: var(--manager-main-color);
+    border-color: var(--manager-main-color);
+  }
+
+  /* チェックマーク（選択時に表示） */
+  & input[type="radio"]:checked + .radio-mark::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  /* ホバー時のスタイル */
+  &:hover .radio-mark {
+    box-shadow: inset 1px 1px 1px black;
+  }
+
+}
+
+// ラジオボタンのdisabledの場合のスタイル
+input[type="radio"]:disabled {
+  & + .radio-mark {
+    background-color: #f0f0f0; /* 背景を薄いグレーに */
+    border-color: #ccc; /* 枠線をグレーに */
+    cursor: not-allowed; /* カーソルを禁止マークに */
+    opacity: 0.6; /* 全体を少し薄く */
+  }
+
+  &:checked + .radio-mark {
+    background-color: #d1d1d1; /* 選択時も薄いグレー */
+    border-color: #aaa; /* 枠線も少し濃いグレー */
+  }
+
+  &:checked + .radio-mark::after {
+    background-color: #888; /* チェックマークをグレーに */
+  }
+}
+
+// チェックボックスのスタイル
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  position: relative;
+
+  & input[type="checkbox"] {
+    display: none; /* デフォルトのチェックボックスを非表示 */
+    &:checked + .checkmark {
+      background-color: var(--manager-main-color);
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  & .checkmark {
+    width: 20px;
+    height: 20px;
+    border: solid 1px #333;
+    border-radius: 4px;
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 0;
+      width: 8px;
+      height: 16px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+      display: none;
+    }
+
+  }
+
+  & .checkbox-label {
+    color: #333;
+  }
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-input {
+  padding: 8px 30px 8px 8px ;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.dropdown-list {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 200;
+}
+
+.dropdown-list label {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropdown-list label:hover {
+  background: #f0f0f0;
+}
+
+
+.heading-menu {
+  height: 35px;
+  padding: 0 1rem;
+  background: var(--manager-main-color);
+  color: white;
+  font-size: 1.2rem;
+  border-radius: .25rem;
+  display: flex;
+  align-items: center;
+}
+
+.support-msg {
+  font-size: .8rem;
+  color: #666;
+}
+
+
+/*************************
+* flash-message
+*************************/
+.flash-message-area {
+  position: relative;
+  overflow: hidden;
+}
+
+.flash-message-box {
+  width: calc(100% - 1rem);
+  margin: 0.25rem auto;
+  padding: 0.25rem 1rem;
+  display: flex;
+  overflow-wrap: anywhere;
+  transition: .2s;
+  align-items: center;
+  right: 0;
+
+  &.flash-message-success {
+    background-color: #c2deff;
+    color: var(--blue-600);
+    border: solid 1px var(--blue-600);
+    border-radius: 0.5rem;
+  }
+
+  &.flash-message-error {
+    background-color: var(--red-200);
+    color: var(--red-600);
+    border: solid 1px var(--red-600);
+    border-radius: 0.5rem;
+  }
+}
+
+.flash-message-hidden {
+  position: relative;
+  right: -100%;
+}
+
+.flash-message-box-close {
+  margin-right: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+
+  &:hover {
+    margin-right: 1.5rem;
+  }
+}
+
+
+.one-contents {
+  position: relative;
+  padding: 1rem;
+  border: solid 1px var(--manager-main-color);
+  border-radius: .3rem;
+
+  .one-contents-title {
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    background: white;
+    padding: .25rem;
+  }
+}
+
+.x-scroll-full {
+  min-width: 100%;
+  overflow-x: scroll;
+}
+
+
+
+.unit {
+  font-size: .7rem;
+  color: #555;
+}
+
+.num-count {
+
+  font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+

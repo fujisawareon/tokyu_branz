@@ -1,0 +1,73 @@
+
+:root {
+  --navigation-height: 45px;
+}
+
+.navigation {
+  height: var(--navigation-height);
+  border-bottom: solid 1px var(--manager-main-color);
+  padding: .25rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.navigation-btn {
+  border: solid 1px var(--manager-main-color);
+  padding: .1rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+
+  &.active {
+    background: var(--manager-main-color);
+    color: white;
+  }
+
+  &:hover {
+    background: var(--manager-hover-color);
+    color: var(--manager-main-color);
+  }
+}
+
+.main-contents {
+  background: #dce8ff;
+  flex: 1;
+  //min-height: calc(100vh - var(--header-height) - var(--navigation-height));
+  padding: 1rem;
+
+  & > .contents-area {
+    padding: 1rem;
+    border-radius: .5rem;
+    background: white;
+  }
+}
+
+// コンテンツのパンくず
+.breadcrumb {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px var(--manager-main-color);
+
+  ol {
+    padding: .5rem 0;
+    margin: 0 auto;
+
+    li {
+      display: inline;
+    }
+
+    li:not(:last-of-type)::after {
+      content: ">";
+      margin: 0 1em;
+      color: var(--manager-main-color);
+    }
+  }
+}
+
+.page-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: .5rem;
+  color: var(--manager-main-color);
+}

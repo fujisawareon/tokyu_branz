@@ -1,11 +1,43 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/css/manager/app.css',
+                'resources/js/app.js',
+                'resources/js/common/daterangepicker.js',
+                'resources/js/common/datatables.js',
+                'resources/js/manager_app.js',
+                'resources/js/manager_project.js',
+
+                // 各ページ単位
+                'resources/css/manager/dashboard.css',
+                'resources/scss/manager/project/customer-analysis.scss',
+                'resources/js/manager/dashboard.js',
+                'resources/js/manager/manager_show.js',
+                'resources/js/manager/contents/sales_status.js',
+                'resources/js/manager/contents/sales_schedule.js',
+                'resources/js/manager/project/customer/search.js',
+                'resources/js/manager/project/customer/list.js',
+
+                'resources/js/customer/sample.jsx',
+            ],
             refresh: true,
         }),
+        react(),
     ],
+    optimizeDeps: {
+        include: ['moment', 'jquery', 'daterangepicker'],
+    },
+    server: {
+        host: true,
+        cors: true,
+        hmr: {
+            host: 'localhost',
+        },
+    },
 });

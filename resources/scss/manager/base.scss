@@ -1,0 +1,69 @@
+
+.side-manu {
+  position: sticky;
+  max-height: 100vh;
+  min-height: calc(100vh - var(--header-height));
+  width: 200px;
+  top: 0;
+  background: var(--manager-main-color);
+  border-right: solid 1px var(--manager-main-color);
+
+  & > .side-menu-list {
+    width: 100%;
+
+    & > a {
+      width: 100%;
+      display: block;
+      padding: 1rem .5rem;
+      color: white;
+      font-weight: bold;
+      transition: .2s;
+
+      &.active {
+        color: white;
+        background: #0041bd;
+      }
+
+      &:hover {
+        color: white;
+        background: #213254;;
+      }
+    }
+  }
+}
+
+.page-contents-area {
+  flex: 1;
+  background: #dce8ff;
+}
+
+// 画面名
+.view-name {
+  padding: .25rem 1rem;
+  border-bottom: solid 1px var(--manager-main-color);
+  background: #fff;
+  font-weight: bold;
+}
+
+.page-contents {
+  padding: .5rem;
+}
+
+.main-contents {
+  background: white;
+  padding: 1rem;
+  border-radius: .5rem;
+}
+
+select.input-box {
+  padding-right: 3rem;
+}
+
+
+.image {
+  height: 200px;
+  & > img {
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,90 @@
+
+:root {
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-350: #DDDDDD;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --gray-950: #03071;
+
+    --sky-50: #f0f9ff;
+    --sky-100: #e0f2fe;
+    --sky-200: #bae6fd;
+    --sky-300: #7dd3fc;
+    --sky-400: #38bdf8;
+    --sky-500: #0ea5e9;
+    --sky-600: #0284c7;
+    --sky-700: #0369a1;
+    --sky-800: #075985;
+    --sky-900: #0c4a6e;
+    --sky-950: #082f49;
+
+    --blue-50 : #eff6ff;
+    --blue-100 : #dbeafe;
+    --blue-200 : #bfdbfe;
+    --blue-300 : #93c5fd;
+    --blue-400 : #60a5fa;
+    --blue-500 : #3b82f6;
+    --blue-600 : #2563eb;
+    --blue-700 : #1d4ed8;
+    --blue-800 : #1e40af;
+    --blue-900 : #1e3a8a;
+    --blue-950 : #172554;
+
+    --red-50: #fef2f2;
+    --red-100: #fee2e2;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-400: #f87171;
+    --red-500: #ef4444;
+    --red-600: #dc2626;
+    --red-700: #b91c1c;
+    --red-800: #991b1b;
+    --red-900: #7f1d1d;
+    --red-950: #450a0a;
+
+    --teal-50: #f0fdfa;
+    --teal-100: #ccfbf1;
+    --teal-200: #99f6e4;
+    --teal-300: #5eead4;
+    --teal-400: #2dd4bf;
+    --teal-500: #14b8a6;
+    --teal-600: #0d9488;
+    --teal-700: #0f766e;
+    --teal-800: #115e59;
+    --teal-900: #134e4a;
+    --teal-950: #042f2e;
+
+    --emerald-50 :#ecfdf5;
+    --emerald-100 :#d1fae5;
+    --emerald-200 :#a7f3d0;
+    --emerald-300 :#6ee7b7;
+    --emerald-400 :#34d399;
+    --emerald-500 :#10b981;
+    --emerald-600 :#059669;
+    --emerald-700 :#047857;
+    --emerald-800 :#065f46;
+    --emerald-900 :#064e3b;
+    --emerald-950 :#022c22;
+
+    --yellow-50 : #fefce8;
+    --yellow-100: #fef9c3;
+    --yellow-200: #fef08a;
+    --yellow-300: #fde047;
+    --yellow-400: #facc15;
+    --yellow-500: #eab308;
+    --yellow-600: #ca8a04;
+    --yellow-700: #a16207;
+    --yellow-800: #854d0e;
+    --yellow-900: #713f12;
+    --yellow-950: #422006;
+}
+
+
+
