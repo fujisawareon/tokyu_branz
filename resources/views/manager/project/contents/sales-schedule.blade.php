@@ -1,7 +1,7 @@
 <x-app-manager-project-layout>
 
     <x-slot name="js">
-        @vite(['resources/js/manager/contents/sales_schedule.js'])
+        @vite(['resources/js/common/sortable.js'])
     </x-slot>
 
     <x-slot name="css">
@@ -72,14 +72,4 @@
 </x-app-manager-project-layout>
 
 <style>
-    .sortable-item {
-        padding: 10px;
-        background-color: #f0f0f0;
-        margin: 5px;
-        cursor: grab;
-    }
-    .sortable-ghost {
-        opacity: 0.5;
-        background: #001C5133;
-    }
 </style>

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Consts\CommonConsts;
 use App\Models\Building;
 use App\Models\BuildingSetting;
 use App\Models\Manager;
 use App\Models\MasterData;
+use App\Repositories\Interfaces\ActionBtnSettingRepositoryInterface;
 use App\Repositories\Interfaces\BuildingStatusRepositoryInterface;
 use App\Repositories\Interfaces\LimitedContentRepositoryInterface;
 use App\Repositories\Interfaces\MasterDataRepositoryInterface;
@@ -20,6 +20,7 @@ class BuildingSettingService
 {
     use CacheTrait;
 
+    private ActionBtnSettingRepositoryInterface $action_btn_setting_repository;
     private BuildingStatusRepositoryInterface $building_status_repository;
     private LimitedContentRepositoryInterface $limited_content_repository;
     private MasterDataRepositoryInterface $master_data_repository;
@@ -30,6 +31,7 @@ class BuildingSettingService
      */
     public function __construct()
     {
+        $this->action_btn_setting_repository = app(ActionBtnSettingRepositoryInterface::class);
         $this->building_status_repository = app(BuildingStatusRepositoryInterface::class);
         $this->limited_content_repository = app(LimitedContentRepositoryInterface::class);
         $this->master_data_repository = app(MasterDataRepositoryInterface::class);
@@ -52,7 +54,7 @@ class BuildingSettingService
      * @param array $param
      * @return BuildingSetting|bool
      */
-    public function updateSalesSuspensionMessage(Building $building, array $param): bool|BuildingSetting
+    public function upsertBuildingSetting(Building $building, array $param): bool|BuildingSetting
     {
         $building_setting = $building->buildingSetting;
 
@@ -119,7 +121,7 @@ class BuildingSettingService
         // 一度全て非表示にする
         $this->sales_schedule_repository->allHiddenByBuildingId($building_id);
 
-        /** @var Manager $auth */
+        /** @var Manager $auth_user */
         $auth_user = Auth::guard('managers')->user();
 
         foreach ($records as $record) {
@@ -139,6 +141,69 @@ class BuildingSettingService
                 $this->sales_schedule_repository->create($record);
             }
         }
+    }
+
+    /**
+     * アクションボタン設定の更新をする
+     * @param Building $building
+     * @param array $request
+     * @return void
+     */
+    public function updateActionBtnSetting(Building $building, array $request): void
+    {
+        /** @var Manager $manager */
+        $manager = Auth::guard('managers')->user();
+
+        // リクエストにアクションボタン設定が1つもない場合
+        if (!isset($request['button_name'])) {
+            // 全削除して処理終了
+            $this->action_btn_setting_repository->deleteByBuildingId($building->id, $manager->id);
+            return;
+        }
+
+        // 既存データを取得
+        $action_btn_setting_list = $building->actionBtnSetting;
+
+        // 既存のデータがあり、1つ以上アクションボタンの設定が存在する場合
+        if ($action_btn_setting_list->count()) {
+            // 削除するべきidを抽出
+            $delete_ids = $action_btn_setting_list->whereNotIn('id', array_keys($request['button_name']))
+                ->pluck('id')->all();
+            // 削除実行
+            $this->action_btn_setting_repository->deleteByIds($building->id, $delete_ids, $manager->id);
+        }
+
+        // 追加更新処理
+        $sort = 1;
+        $new_records = [];
+        foreach ($request['button_name'] as $action_btn_setting_id => $button_name) {
+            // 既存データから対象IDのレコードを取得
+            $action_btn_setting = $action_btn_setting_list->where('id', $action_btn_setting_id)->first();
+            if ($action_btn_setting) {
+                // 既存レコードの更新
+                $this->action_btn_setting_repository->update($action_btn_setting, [
+                    'button_name' => $button_name,
+                    'url' => $request['url'][$action_btn_setting_id],
+                    'display_flg' => $request['display_flg'][$action_btn_setting_id] ?? 0,
+                    'sort' => $sort,
+                    'updated_by' => $manager->id,
+                ]);
+            } else {
+                // 既存データがないので、登録用配列に追加する
+                $new_records[] = [
+                    'building_id' => $building->id,
+                    'button_name' => $button_name,
+                    'url' => $request['url'][$action_btn_setting_id],
+                    'display_flg' => $request['display_flg'][$action_btn_setting_id] ?? 0,
+                    'sort' => $sort,
+                    'created_by' => $manager->id,
+                ];
+            }
+
+            $sort++;
+        }
+
+        $this->action_btn_setting_repository->insert($new_records);
     }
 
     /**
@@ -188,7 +253,7 @@ class BuildingSettingService
      */
     public function upsertLimitedContent(int $building_id, array $records): void
     {
-        /** @var Manager $auth */
+        /** @var Manager $auth_user */
         $auth_user = Auth::guard('managers')->user();
 
         // 既存のデータを取得

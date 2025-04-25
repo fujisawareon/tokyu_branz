@@ -1,5 +1,4 @@
 
-
 import Sortable from "sortablejs";
 
 document.addEventListener("DOMContentLoaded",() => {
@@ -9,6 +8,4 @@ document.addEventListener("DOMContentLoaded",() => {
         handle: '.drag-handle',
         ghostClass: 'sortable-ghost',
     });
-
 })
-

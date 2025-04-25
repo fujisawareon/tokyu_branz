@@ -26,10 +26,11 @@ class CustomerBuilding extends Model
     ];
 
     public const STATUS_ENTRY = 1; // エントリー
+    public const ONLINE_SEMINAR_MOVIE = 2; // オンラインセミナー動画
     public const STATUS_DISCUSSION_DISCONTINUED = 99; // 検討中止
-    public const STATUS_LIST = [
+    public const STATUS_LIST = [ // TODO
         self::STATUS_ENTRY => 'エントリー',
-        2 => 'ウェビナー',
+        self::ONLINE_SEMINAR_MOVIE => 'オンラインセミナー動画',
         3 => 'オンライン商談予約',
         4 => 'オンライン商談',
         5 => 'フリー見学予約',

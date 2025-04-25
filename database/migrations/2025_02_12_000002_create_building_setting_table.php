@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('max_building_price')->default(0)->comment('分譲価格最大値');
             $table->decimal('max_interest_rate', 6, 3)->default(0.000)->comment('金利最大値');
             $table->string('building_site_url', 255)->default('')->comment('物件サイトURL');
-            $table->boolean('building_site_display_flg')->default(0)->comment('物件サイトURL');
+            $table->boolean('building_site_display_flg')->default(0)->comment('物件サイト表示フラグ');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('作成日時');
             $table->integer('created_by')->comment('作成者');
@@ -32,8 +32,9 @@ return new class extends Migration
             $table->softDeletes();
 
             // インデックス
-            $table->index(['building_id'], 'idx_building_id_building_id');
+            $table->index(['building_id'], 'idx_building_setting_building_id');
         });
+
 
         Schema::create('building_setting_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -45,14 +46,17 @@ return new class extends Migration
             $table->string('nearest_station', 255)->nullable()->default(null)->comment('最寄り');
             $table->integer('max_building_price')->default(0)->comment('分譲価格最大値');
             $table->decimal('max_interest_rate', 6, 3)->default(0.000)->comment('金利最大値');
-            $table->string('building_site_url', 255)->nullable()->comment('物件サイトURL');
-            $table->boolean('building_site_display_flg')->comment('物件サイトURL');
+            $table->string('building_site_url', 255)->default('')->comment('物件サイトURL');
+            $table->boolean('building_site_display_flg')->comment('物件サイト表示フラグ');
 
             $table->timestamp('original_created_at')->nullable()->comment('元の作成日時');
             $table->integer('created_by')->comment('作成者');
             $table->timestamp('original_updated_at')->nullable()->comment('元の更新日時');
             $table->integer('updated_by')->nullable()->comment('更新者');
             $table->timestamp('history_created_at')->useCurrent()->comment('履歴作成日時');
+
+            // インデックス
+            $table->index(['building_id'], 'idx_building_setting_histories_building_id');
         });
 
         DB::unprepared('

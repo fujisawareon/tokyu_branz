@@ -222,6 +222,11 @@ span.current-page {
       padding: .25rem;
       border-left: solid 1px #888;
     }
+
+    &.sortable-ghost {
+      opacity: 0.5;
+      background: #001C5133;
+    }
   }
 
 }

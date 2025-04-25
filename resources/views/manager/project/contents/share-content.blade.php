@@ -1,7 +1,7 @@
 <x-app-manager-project-layout>
 
     <x-slot name="js">
-        @vite(['resources/js/manager/contents/sales_schedule.js'])
+        @vite(['resources/js/common/sortable.js'])
     </x-slot>
 
     <x-slot name="css">

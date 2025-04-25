@@ -6,6 +6,9 @@ namespace App\Providers\Repositories;
 
 return [
     [
+        'interface' => \App\Repositories\Interfaces\ActionBtnSettingRepositoryInterface::class,
+        'class' => \App\Repositories\ActionBtnSettingRepository::class,
+    ],[
         'interface' => \App\Repositories\Interfaces\AppLogRepositoryInterface::class,
         'class' => \App\Repositories\AppLogRepository::class,
     ], [

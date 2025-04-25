@@ -11,16 +11,17 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/common/daterangepicker.js',
                 'resources/js/common/datatables.js',
+                'resources/js/common/sortable.js',
                 'resources/js/manager_app.js',
                 'resources/js/manager_project.js',
 
                 // 各ページ単位
                 'resources/css/manager/dashboard.css',
                 'resources/scss/manager/project/customer-analysis.scss',
+                'resources/js/manager/contents/action_btn_setting.js',
+                'resources/js/manager/contents/sales_status.js',
                 'resources/js/manager/dashboard.js',
                 'resources/js/manager/manager_show.js',
-                'resources/js/manager/contents/sales_status.js',
-                'resources/js/manager/contents/sales_schedule.js',
                 'resources/js/manager/project/customer/search.js',
                 'resources/js/manager/project/customer/list.js',
 

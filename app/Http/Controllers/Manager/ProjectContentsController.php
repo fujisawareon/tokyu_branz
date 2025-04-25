@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Manager;
 
 use App\Consts\SessionConst;
+use App\Http\Requests\Manager\Contents\ActionBtnSettingUpdateRequest;
 use App\Http\Requests\Manager\Contents\LimitedContentsUpdateRequest;
 use App\Http\Requests\Manager\Contents\SalesStatusUpdateRequest;
 use App\Http\Requests\Manager\Contents\SalesScheduleUpdateRequest;
@@ -84,7 +85,7 @@ class ProjectContentsController extends Controller
 
             if ($request->sales_status <> Building::SALES_STATUS_ON_SALE) {
                 // 販売中止時のメッセージを更新
-                $this->building_setting_service->updateSalesSuspensionMessage($building, [
+                $this->building_setting_service->upsertBuildingSetting($building, [
                     'sales_suspension_title' => $request->title,
                     'sales_suspension_message' => $request->message,
                 ]);
@@ -152,29 +153,35 @@ class ProjectContentsController extends Controller
      */
     public function actionBtn(Building $building): View
     {
-        $building->load('buildingSetting');
+        $building->load([
+            'buildingSetting',
+            'actionBtnSetting',
+        ]);
 
         return view('manager.project.contents.action-btn', [
             'building' => $building,
+            'max_action_btn_id' => $building->actionBtnSetting->max('id'),
         ]);
     }
 
     /**
      * アクションボタン設定を更新する
      * @param Building $building
-     * @param FormRequest $request TODO
+     * @param ActionBtnSettingUpdateRequest $request
      * @return RedirectResponse
      */
-    public function actionBtnUpdate(Building $building, FormRequest $request): RedirectResponse
+    public function actionBtnUpdate(Building $building, ActionBtnSettingUpdateRequest $request): RedirectResponse
     {
+
         try {
             // 物件サイトの更新
-            $this->building_setting_service->updateSalesSuspensionMessage($building, [
+            $this->building_setting_service->upsertBuildingSetting($building, [
                 'building_site_url' => $request->building_site_url ?? '',
                 'building_site_display_flg' => $request->building_site_display_flg ?? 0,
             ]);
 
-            // アクションボタンの更新 TODO
+            // アクションボタンの更新
+            $this->building_setting_service->updateActionBtnSetting($building, $request->all());
 
             return redirect()->route('manager_project_action_btn', ['building' => $building->id])
                 ->with(SessionConst::FLASH_MESSAGE_SUCCESS, ['アクションボタン設定を更新しました']);

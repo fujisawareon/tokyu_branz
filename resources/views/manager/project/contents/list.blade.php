@@ -30,7 +30,7 @@
             <div class="heading-menu">各種コンテンツ管理</div>
             <div class="content-menus">
                 <a href="">スケジュール</a>
-                <a href="">ウェビナー動画</a>
+                <a href="">オンラインセミナ－動画</a>
                 <a href="">紹介動画</a>
                 <a href="">間取り</a>
                 <a href="" class="option">専有部VR</a>
@@ -95,5 +95,17 @@
 
     .content-menus > a.option:hover:after {
         border: solid 1px var(--manager-main-color);
+    }
+
+    @media (max-width: 1280px) {
+        .content-menus {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    @media (max-width: 1025px) {
+        .content-menus {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 </style>

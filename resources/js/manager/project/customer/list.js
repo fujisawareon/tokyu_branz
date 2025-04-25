@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         name: 'web_customer_id',
                         searchable: false,
                     }, {
-                        // ウェビナー動画
+                        // オンラインセミナー動画
                         data: 'web_customer_id',
                         name: 'web_customer_id',
                         searchable: false,

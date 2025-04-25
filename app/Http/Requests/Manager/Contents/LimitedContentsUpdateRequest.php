@@ -33,7 +33,7 @@ class LimitedContentsUpdateRequest extends FormRequest
             $invalid_keys = array_diff(array_keys($display), $limited);
 
             if (!empty($invalid_keys)) {
-                $validator->errors()->add('display', '不正な値が選択されました');
+                $validator->errors()->add('validate', '不正な値が選択されました');
             }
         });
     }

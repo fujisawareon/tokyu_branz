@@ -1,8 +1,8 @@
 <x-app-manager-project-layout>
 
     <x-slot name="js">
-        {{-- TODO --}}
-        @vite(['resources/js/manager/contents/sales_schedule.js'])
+        @vite(['resources/js/common/sortable.js'])
+        @vite(['resources/js/manager/contents/action_btn_setting.js'])
     </x-slot>
 
     <x-slot name="css">
@@ -30,9 +30,9 @@
             @include('layouts.manager.flash_message')
             <div class="page-name">アクションボタン設定</div>
 
-            <button type="button" class="btn min mb-2">追加</button>
+            <button type="button" id="add_btn" class="btn min mb-2">追加</button>
 
-            <div style="width: 800px">
+            <div style="width: 850px">
                 <form method="POST" action="{{ route('manager_project_action_btn', ['building' => $building->id]) }}">
                     @csrf
                     <div class="list-element mb-2">
@@ -50,52 +50,60 @@
                             <div style="width: 65px;" class="text-center"></div>
                             <div style="width: 200px" class="flex-start-center">物件サイト</div>
                             <div style="flex: 1">
-                                <x-input-text type="text" name="building_site_url" class="w-full"
+                                <x-input-text type="url" name="building_site_url" class="w-full"
                                               id="building_site_url" placeholder="URL"
                                               :value="old('building_site_url', $building->buildingSetting->building_site_url?? '')"
                                               :error="$errors->has('building_site_url')"/>
+                                <x-input-error :messages="$errors->get('building_site_url')" class="mt-2" />
                             </div>
                             <div style="width: 65px">
                                 <div class="flex-center-center h-full">
-                                <x-input-accepted-checkbox name="building_site_display_flg"
-                                                           id="building_site_display_flg"
-                                                           :checked="$building->buildingSetting->building_site_display_flg?? 0"
-                                />
+                                    <div>
+                                        <x-input-accepted-checkbox name="building_site_display_flg"
+                                                                   id="building_site_display_flg"
+                                                                   :checked="$building->buildingSetting->building_site_display_flg?? 0"
+                                        />
+                                        <x-input-error :messages="$errors->get('building_site_display_flg')" class="mt-2" />
+                                    </div>
                                 </div>
                             </div>
-                            <div style="width: 65px">
-                            </div>
+                            <div style="width: 65px"></div>
                         </div>
 
                         {{-- アクションボタン --}}
                         <div class="" id="sortable-list">
-                            <div class="list-element-row" style="align-items: stretch;">
-                                <div style="width: 65px; cursor: grab;" class="drag-handle flex-center-center">
-                                    ☰
+                            @foreach($building->actionBtnSetting as $action_btn_setting )
+                                <div class="list-element-row" style="align-items: stretch;">
+                                    <div style="width: 65px; cursor: grab;" class="drag-handle flex-center-center">
+                                        ☰
+                                    </div>
+                                    <div style="width: 200px">
+                                        <x-input-text type="text" name="button_name[{{ $action_btn_setting->id }}]"
+                                                      class="w-full"
+                                                      id="button_name_{{ $action_btn_setting->id }}" placeholder="来場予約"
+                                                      :value="old('button_name.' . $action_btn_setting->id , $action_btn_setting->button_name)"
+                                                      :error="$errors->has('button_name.' . $action_btn_setting->id)"/>
+                                        <x-input-error :messages="$errors->get('button_name.' . $action_btn_setting->id)" class="mt-2" />
+                                    </div>
+                                    <div style="flex: 1">
+                                        <x-input-text type="url" name="url[{{ $action_btn_setting->id }}]" class="w-full"
+                                                      id="url_{{ $action_btn_setting->id }}" placeholder="URL"
+                                                      :value="old('url.' . $action_btn_setting->id, $action_btn_setting->url)"
+                                                      :error="$errors->has('url.' . $action_btn_setting->id)"/>
+                                        <x-input-error :messages="$errors->get('url.' . $action_btn_setting->id)" class="mt-2" />
+                                    </div>
+                                    <div style="width: 65px" class="flex-center-center">
+                                        <x-input-accepted-checkbox name="display_flg[{{ $action_btn_setting->id }}]"
+                                                                   id="display_flg_{{ $action_btn_setting->id }}"
+                                                                   :checked="$action_btn_setting->display_flg"
+                                        />
+                                        <x-input-error :messages="$errors->get('display_flg.' . $action_btn_setting->id)" class="mt-2" />
+                                    </div>
+                                    <div style="width: 65px" class="flex-center-center">
+                                        <button type="button" class="btn min color-red delete-btn">削除</button>
+                                    </div>
                                 </div>
-                                <div style="width: 200px">
-                                    <x-input-text type="text" name="button_name[1]" class="w-full"
-                                                  id="button_name_1" placeholder="来場予約"
-                                                  :value="old('button_name[1]')"
-                                                  :error="$errors->has('button_name[1]')"/>
-                                </div>
-                                <div style="flex: 1">
-                                    <x-input-text type="text" name="title" class="w-full"
-                                                  id="title" placeholder="URL"
-                                                  :value="old('title')"
-                                                  :error="$errors->has('title')"/>
-                                </div>
-                                <div style="width: 65px" class="flex-center-center">
-                                    <input type="hidden" name="sales_schedule_key[]" value="">
-                                    <x-input-accepted-checkbox name="display[]"
-                                                               id="display_"
-                                                               :checked="0"
-                                    />
-                                </div>
-                                <div style="width: 65px" class="flex-center-center">
-                                    <button type="button" class="btn min color-red">削除</button>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="flex-center-center">
@@ -108,19 +116,35 @@
             <div style="color: red;">{{ $message }}</div>
             @enderror
         </div>
-    </div>
 
+        {{-- 行追加する時のテンプレート --}}
+        <template id="action-btn-template">
+            <div class="list-element-row" style="align-items: stretch;">
+                <div style="width: 65px; cursor: grab;" class="drag-handle flex-center-center">☰</div>
+                <div style="width: 200px;">
+                    @verbatim
+                        <input type="text" name="button_name[${id}]" class="input-box w-full" id="button_name[${id}]" placeholder="来場予約" required>
+                    @endverbatim
+                </div>
+                <div style="flex: 1">
+                    @verbatim
+                        <input type="text" name="url[${id}]" class="input-box w-full" id="url[${id}]" placeholder="URL" required>
+                    @endverbatim
+                </div>
+                <div style="width: 65px;" class="flex-center-center">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" class="checkbox-icon" name="display_flg[${id}]" value="1" id="display_flg_${id}">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div style="width: 65px;" class="flex-center-center">
+                    <button type="button" class="btn min color-red delete-btn">削除</button>
+                </div>
+            </div>
+        </template>
+    </div>
 </x-app-manager-project-layout>
 
-<style>
-    .sortable-item {
-        padding: 10px;
-        background-color: #f0f0f0;
-        margin: 5px;
-        cursor: grab;
-    }
-    .sortable-ghost {
-        opacity: 0.5;
-        background: #001C5133;
-    }
-</style>
+<script>
+    let max_action_btn_id = @json($max_action_btn_id);
+</script>

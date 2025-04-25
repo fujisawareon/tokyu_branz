@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property BuildingSetting $buildingSetting
  * @property Collection<int, Manager> $personCharge
+ * @property Collection<int, ActionBtnSetting> $actionBtnSetting
  *
  */
 class Building extends Model
@@ -86,4 +87,12 @@ class Building extends Model
         return $this->BelongsToMany(Manager::class,'building_invitation');
     }
 
+    /**
+     * アクションボタン設定とのリレーション
+     * @return HasMany<int, ActionBtnSetting>
+     */
+    public function actionBtnSetting(): HasMany
+    {
+        return $this->hasMany(ActionBtnSetting::class)->orderBy('sort');
+    }
 }
