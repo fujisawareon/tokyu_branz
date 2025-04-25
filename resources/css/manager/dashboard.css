@@ -22,9 +22,10 @@
 
     & > .element {
         position: relative;
+        min-height: 50px;
         display: flex;
         justify-content: center;
-        align-items: end;
+        align-items: center;
         width: calc((100% - 60px) / 4);
         padding: 1rem .25rem 1rem;
         color: var(--manager-main-color);

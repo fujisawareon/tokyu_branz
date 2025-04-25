@@ -52,7 +52,7 @@
             <div class="element">
                 <span class="title">総PV数</span>
                 <div class="element-value">
-                    <span class="counter count-font" style="font-size: 5rem;"
+                    <span class="counter count-font" style="font-size: 4rem;"
                           data-target="{{ $total_view_count }}">0</span>PV
                 </div>
             </div>

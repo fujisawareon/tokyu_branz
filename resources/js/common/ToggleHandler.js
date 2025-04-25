@@ -180,7 +180,7 @@ export class ToggleHandler {
      * @param display_id 表示するモーダル自体のID
      *
      * ※このメソッドを利用するためにはモーダルが下記の構成になっている事が前提となる
-     * <div class="modal-background" id="____">
+     * <div class="modal-background" id="{$display_id}">
      *     <div class="modal" style="width: ___px;">
      *         <div class="modal-close">×</div>
      *     </div>

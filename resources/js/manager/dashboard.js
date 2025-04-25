@@ -1,39 +1,15 @@
 import {ToggleHandler} from './../common/ToggleHandler';
-
-function smoothCountUp(element, duration) {
-    let target = parseFloat(element.getAttribute('data-target')); // 小数点対応
-    let decimals = parseInt(element.getAttribute('data-decimals')) || 0; // 小数点桁数
-    let start = 0;
-    let startTime = null;
-
-    function updateCount(timestamp) {
-        if (!startTime) startTime = timestamp;
-        let progress = timestamp - startTime;
-        let percentage = Math.min(progress / duration, 1);
-        let current = percentage * target;
-
-        element.textContent = current.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-
-        if (progress < duration) {
-            requestAnimationFrame(updateCount);
-        } else {
-            element.textContent = target.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-        }
-    }
-
-    requestAnimationFrame(updateCount);
-}
+import {CounterAnimator} from './../common/CounterAnimator';
 
 document.addEventListener("DOMContentLoaded", function () {
 
     // 物件選択時のモーダルの開閉
     ToggleHandler.modalDisplay( 'building_select_btn','building_select');
 
+    // カウンターのアニメーション
     document.querySelectorAll('.counter').forEach(counter => {
-        smoothCountUp(counter, 500); // 0.5秒でカウントアップ
+        CounterAnimator.smoothCountUp(counter, 300);
     });
-
-
 
     const form = document.querySelector("form");
     // チェックボックスの取得
