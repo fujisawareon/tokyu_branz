@@ -46,7 +46,7 @@
                                 <div class="list-element-row">
                                     <div style="width: 65px; cursor: grab;" class="drag-handle text-center">☰</div>
                                     <div style="flex: 1">{{ $sales_schedule['schedule_name'] }}</div>
-                                    <div style="width: 65px" class="text-center">
+                                    <div style="width: 65px" class="text-center flex-center-center">
                                         <input type="hidden" name="sales_schedule_key[{{ $sales_schedule['key'] }}]" value="{{ $sales_schedule['key'] }}">
                                         <x-input-accepted-checkbox name="display[{{ $sales_schedule['key'] }}]"
                                                                    id="display_{{ $sales_schedule['key'] }}"

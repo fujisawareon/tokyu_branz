@@ -13,7 +13,7 @@
     </x-slot>
 
     <div style="padding: .25rem;">
-        選択中の物件&nbsp;：&nbsp;<a href="" class="link">{{ $building->building_name }}</a>
+        選択中の物件&nbsp;：&nbsp;<a href="{{ route('manager_project_home', ['building' => $building->id]) }}" class="link">{{ $building->building_name }}</a>
     </div>
 
     <div class="main-contents">

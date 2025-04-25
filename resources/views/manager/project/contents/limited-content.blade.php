@@ -49,14 +49,12 @@
                                         (OP)
                                     @endif
                                 </div>
-                                <div style="width: 65px" class="text-center">
-                                    <div class="flex-center-center">
-                                        <input type="hidden" name="limited_content[]" value="{{ $limited_content['key'] }}">
-                                        <x-input-accepted-checkbox name="display[{{ $limited_content['key'] }}]"
-                                                                   id="display_{{ $limited_content['key'] }}"
-                                                                   :checked="$limited_content['display_flg']"
-                                        />
-                                    </div>
+                                <div style="width: 65px" class="text-center flex-center-center">
+                                    <input type="hidden" name="limited_content[]" value="{{ $limited_content['key'] }}">
+                                    <x-input-accepted-checkbox name="display[{{ $limited_content['key'] }}]"
+                                                               id="display_{{ $limited_content['key'] }}"
+                                                               :checked="$limited_content['display_flg']"
+                                    />
                                 </div>
                             </div>
                         @endforeach
