@@ -1,4 +1,20 @@
 
+.building-selected {
+    width: 100%;
+    padding: .5rem;
+    margin-bottom: 2rem;
+    border-bottom: solid 1px var(--blue-200);
+
+    .building-name {
+        padding: .25rem 1rem;
+        background: var(--blue-50);
+        border: solid 1px var(--blue-200);
+        border-radius: .25rem;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+}
+
 .dashboard-contents {
     display: flex;
     gap: 20px;
@@ -33,38 +49,6 @@
         .count-font {
             line-height: 1;
         }
-    }
-}
-
-.building-selected {
-    width: 100%;
-    padding: .5rem;
-    border-bottom: solid 1px var(--blue-200);
-
-    .building-name {
-        padding: .25rem 1rem;
-        background: var(--blue-50);
-        border: solid 1px var(--blue-200);
-        border-radius: .25rem;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
-}
-
-#building_select{
-    position: absolute;
-    display: none;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    background: #1118;
-
-    & > div {
-        width: 800px;
-        margin: 100px auto;
-        padding: 2rem;
-        background: white;
     }
 }
 

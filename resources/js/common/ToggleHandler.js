@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 export class ToggleHandler {
 
     /**
@@ -172,5 +174,29 @@ export class ToggleHandler {
         })
     }
 
+    /**
+     * モーダルの開閉を行う
+     * @param btn_id モーダルを表示する為のボタンのID
+     * @param display_id 表示するモーダル自体のID
+     *
+     * ※このメソッドを利用するためにはモーダルが下記の構成になっている事が前提となる
+     * <div class="modal-background" id="____">
+     *     <div class="modal" style="width: ___px;">
+     *         <div class="modal-close">×</div>
+     *     </div>
+     * </div>
+     */
+    static modalDisplay(btn_id, display_id) {
+        // モーダルを開くボタンのクリックでモーダル表示
+        $('#' + btn_id).click(() => {
+            $('#' + display_id).slideDown(100);
+            $('body').css('overflow', 'hidden'); // スクロール禁止
+        });
 
+        // モーダル内の .modal-close がクリックされたら非表示
+        $('#' + display_id).find('.modal-close').click(function () {
+            $(this).closest('#' + display_id).slideUp(100);
+            $('body').css('overflow', 'auto'); // スクロール復活
+        });
+    }
 }

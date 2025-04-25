@@ -19,15 +19,15 @@
     </x-slot>
 
     <div class="main-contents">
-        <div class="dashboard-contents">
-            <div class="building-selected flex-between-center" style="">
-                <div class="flex-start-center" style="gap: 1rem; flex-wrap: wrap">
-                    @foreach($selected_buildings as $building)
-                        <div class="building-name">{{ $building->building_name }}</div>
-                    @endforeach
-                </div>
-                <button class="btn" id="building_select_btn">物件を選択する</button>
+        <div class="building-selected flex-between-center" style="">
+            <div class="flex-start-center" style="gap: 1rem; flex-wrap: wrap">
+                @foreach($selected_buildings as $building)
+                    <div class="building-name">{{ $building->building_name }}</div>
+                @endforeach
             </div>
+            <button class="btn" id="building_select_btn">物件を選択する</button>
+        </div>
+        <div class="dashboard-contents">
             <div class="element">
                 <span class="title">エントリー数</span>
                 <div class="element-value">
@@ -57,19 +57,45 @@
                 </div>
             </div>
             <div class="element">
-                <span class="title">販売中物契約率</span>
-                <div class="element-value">
-                    <span class="counter count-font" style="font-size: 5rem;"
-                          data-target="99" data-decimals="2">0</span>%
-                </div>
+                <span class="title">物件別初回ログイン率</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">物件別エントリー者数</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">物件別PV数</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">物件別来場率</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">物件別ポータルサイトエントリー率</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">物件別フォーム遷移率</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">コンテンツ別閲覧数</span>
+                <div class="element-value"></div>
+            </div>
+            <div class="element">
+                <span class="title">ポータルサイト資料請求数</span>
+                <div class="element-value"></div>
             </div>
         </div>
     </div>
 
 
-    <div class="" id="building_select" >
-        <div>
-            <form method="POST" action="">
+    <div class="modal-background" id="building_select">
+        <div class="modal" style="width: 800px;">
+            <div class="modal-close">×</div>
+            <form method="POST">
                 @csrf
                 <div class="flex mb-2" style="gap: 1rem; flex-wrap: wrap;">
                     <x-input-checkbox name="select_building[]" class=""

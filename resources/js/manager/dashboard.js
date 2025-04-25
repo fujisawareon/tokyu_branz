@@ -1,9 +1,4 @@
-
-
-$('#building_select_btn').click(() => {
-    $('#building_select').slideDown(150);
-});
-
+import {ToggleHandler} from './../common/ToggleHandler';
 
 function smoothCountUp(element, duration) {
     let target = parseFloat(element.getAttribute('data-target')); // 小数点対応
@@ -30,6 +25,10 @@ function smoothCountUp(element, duration) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    // 物件選択時のモーダルの開閉
+    ToggleHandler.modalDisplay( 'building_select_btn','building_select');
+
     document.querySelectorAll('.counter').forEach(counter => {
         smoothCountUp(counter, 500); // 0.5秒でカウントアップ
     });

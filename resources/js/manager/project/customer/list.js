@@ -2,8 +2,8 @@ import $ from "jquery";
 import {Datatables} from '../../../common/datatables.js';
 import 'datatables.net-dt/css/dataTables.dataTables.css'
 import 'datatables.net-fixedcolumns';
-
 import 'datatables.net-fixedheader-dt';
+import {ToggleHandler} from "../../../common/ToggleHandler.js";
 
 const buildingId = document.querySelector('#customers_table').dataset.building;
 const customerListAjaxUrl = document.querySelector('#customers_table').dataset.url;
@@ -12,6 +12,8 @@ let customerListTable = null;
 let customerAccessAnalysisTable = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+    // 項目表示設定のモーダルを開閉
+    ToggleHandler.modalDisplay( 'display_setting_btn','display_setting_modal');
 
     // 顧客一覧表を作成
     function loadCustomerListTable() {
@@ -394,18 +396,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 $('#customers_table').DataTable().ajax.reload(null, false); // 現在ページを維持して再読み込み
             }
         });
-    });
-
-    // 項目表示設定のモーダルを開く
-    $('#display-setting-btn').on('click', function () {
-        $('#display-setting-modal').slideDown(100);
-        $('body').css('overflow', 'hidden'); // スクロール禁止
-    });
-
-    // 項目表示設定のモーダルを閉じる
-    $('#modal-close').on('click', function () {
-        $('#display-setting-modal').slideUp(100);
-        $('body').css('overflow', 'auto'); // スクロール復活
     });
 
     // タブ変更時

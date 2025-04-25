@@ -2,7 +2,7 @@
 <div class="absolute flex-end-center gap-2 mb-2" style="right: 0;z-index: 50;">
     <a href="{{ route('manager_project_customer_create', ['building' => $building->id]) }}" class="btn min">顧客登録</a>
     <button class="btn min color-red">削除</button>
-    <button class="btn min" id="display-setting-btn">項目表示設定</button>
+    <button class="btn min" id="display_setting_btn">項目表示設定</button>
 </div>
 
 <table id="customers_table" class="display nowrap list-tbl customer-list-tbl"
@@ -38,9 +38,9 @@
     </thead>
 </table>
 
-<div id="display-setting-modal" style="display: none;">
-    <div class="display-setting-area">
-        <div id="modal-close">×</div>
+<div class="modal-background" id="display_setting_modal">
+    <div class="modal" style="width: 400px">
+        <div class="modal-close">×</div>
         <div class="mb-2">表示したい項目にチェックを入れてください</div>
         <form method="POST" action="{{ route('manager_project_customer_show_column', ['building' => $building->id]) }}">
             @csrf
