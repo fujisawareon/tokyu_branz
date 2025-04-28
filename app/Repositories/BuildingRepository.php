@@ -20,7 +20,7 @@ class BuildingRepository implements BuildingRepositoryInterface
      */
     public function getBuildings(): Collection
     {
-        return Building::get();
+        return Building::orderBy('id')->get();
     }
 
     /**

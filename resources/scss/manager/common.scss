@@ -44,6 +44,7 @@
   justify-content: end;
   align-items: center;
 }
+
 // ボタン
 .btn {
   padding: .5rem 1rem;
@@ -185,6 +186,7 @@ span.current-page {
 
   tr:nth-child(even) {
     background-color: #ebf3ff;
+
     & td {
       background: #ebf3ff;
     }
@@ -236,10 +238,9 @@ span.current-page {
   max-height: 600px; // スクロールを適用
   overflow: auto; // 上下・左右スクロールを有効化
   position: relative;
-  -ms-overflow-style: none;  /* IE, Edge 用 */
-  scrollbar-width: none;      /* Firefox 用 */
+  -ms-overflow-style: none; /* IE, Edge 用 */
+  scrollbar-width: none; /* Firefox 用 */
 }
-
 
 
 // インプット要素
@@ -268,10 +269,9 @@ select.input-box {
 }
 
 select.dt-input {
-  padding: .5rem 2rem .5rem .25rem!important;
+  padding: .5rem 2rem .5rem .25rem !important;
   appearance: none;
 }
-
 
 
 // ラジオボタンのスタイル
@@ -402,7 +402,7 @@ input[type="radio"]:disabled {
 }
 
 .dropdown-input {
-  padding: 8px 30px 8px 8px ;
+  padding: 8px 30px 8px 8px;
   border: 1px solid #ccc;
   cursor: pointer;
   width: 100%;
@@ -547,6 +547,90 @@ input[type="radio"]:disabled {
 }
 
 
+/*************************
+* chart
+*************************/
+// 横棒グラフ
+.horizontal-chart-area {
+  position: relative;
+  width: 100%;
+  font-size: .8rem;
+
+  & > .horizontal-chart-back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .horizontal-chart-row {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    border-bottom: solid 1px #bbb;
+    display: flex;
+
+    & > .horizontal-chart-title {
+      width: 140px;
+      padding: .25rem 0 .25rem .25rem;
+      text-align: left;
+      border-right: solid 1px #bbb;
+
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+
+      &.pointer {
+        cursor: pointer;
+      }
+
+      & > .toggle-arrow {
+        display: inline-block;
+        transition: transform .2s ease;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+
+        &.rotate-90 {
+          transform: rotate(90deg);
+          top: -2px;
+        }
+      }
+    }
+
+    & > .horizontal-chart-line {
+      display: flex;
+      flex: 1;
+      padding: .35rem 0;
+
+      & > .horizontal-chart-bar {
+        position: relative;
+        background: rgba(75, 192, 192, 0.6);
+        height: 100%;
+        width: 0;
+        transition: width .5s ease-out;
+
+        & > .horizontal-chart-value {
+          position: absolute;
+          top: 50%;
+          right: -65px;
+          width: 60px;
+          font-size: .85rem;
+          text-align: left;
+          transform: translateY(-50%);
+        }
+      }
+    }
+
+    & > .horizontal-chart-space {
+      width: 60px;
+    }
+  }
+}
+
+
 .one-contents {
   position: relative;
   padding: 1rem;
@@ -568,14 +652,12 @@ input[type="radio"]:disabled {
 }
 
 
-
 .unit {
   font-size: .7rem;
   color: #555;
 }
 
 .num-count {
-
   font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
   text-align: right;
   font-variant-numeric: tabular-nums;

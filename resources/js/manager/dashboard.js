@@ -1,14 +1,20 @@
 import {ToggleHandler} from './../common/ToggleHandler';
-import {CounterAnimator} from './../common/CounterAnimator';
+import {Animator} from './../common/Animator';
+import {renderBarChart} from './../common/renderBarChart';
 
 document.addEventListener("DOMContentLoaded", function () {
 
     // 物件選択時のモーダルの開閉
     ToggleHandler.modalDisplay( 'building_select_btn','building_select');
 
-    // カウンターのアニメーション
+    // 数値カウントのアニメーション
     document.querySelectorAll('.counter').forEach(counter => {
-        CounterAnimator.smoothCountUp(counter, 300);
+        Animator.smoothCountUp(counter, 300);
+    });
+
+    // 横棒グラフのアニメーション
+    document.querySelectorAll('.horizontal-chart-bar').forEach(bar => {
+        Animator.horizontalBar(bar);
     });
 
     const form = document.querySelector("form");
@@ -43,5 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    renderBarChart('first_login_rate_chart', building_label, chart_data);
+    renderBarChart('entry_count_chart', building_label, [32, 44, 12], '人');
+    renderBarChart('building_pv_chart', building_label, [234, 122, 85], '件');
+    renderBarChart('building_visit_rate_chart', building_label, [234, 122, 85], '件');
+    renderBarChart('building_portal_site_entry_rate_chart', building_label, [234, 122, 85], '件');
+    renderBarChart('building_form_rate_chart', building_label, [234, 122, 85], '件');
 
 });

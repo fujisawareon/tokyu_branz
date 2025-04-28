@@ -1,10 +1,10 @@
 
 /**
- * CounterAnimator クラス
+ * Animator クラス
  * 数値カウントアップのアニメーションを提供するユーティリティクラス。
  * 主にダッシュボードや統計表示などで使用される。
  */
-export class CounterAnimator {
+export class Animator {
 
     /**
      * 指定要素をスムーズにカウントアップする
@@ -49,6 +49,17 @@ export class CounterAnimator {
         }
 
         requestAnimationFrame(updateCount);
+    }
+
+    /**
+     * 横棒グラフをスムーズに伸ばす
+     * @param element
+     */
+    static horizontalBar (element) {
+        const targetWidth = element.dataset.width;
+        if (targetWidth) {
+            element.style.width = targetWidth + '%';
+        }
     }
 
 }

@@ -45,12 +45,60 @@ class DashboardController extends Controller
 
         $total_view_count = $this->app_log_service->getTotalViewCountByBuildingIds($selected_building_ids);
 
+        $horizontal_data = $this->makeHorizontalData();
         return view('manager.dashboard', [
             'building_list' => $this->convertSelectArray($building_list->all(), 'id', 'building_name'),
             'selected_building_ids' => $selected_building_ids,
             'selected_buildings' => $selected_buildings,
             'total_view_count' => $total_view_count,
+            'horizontal_data' => $horizontal_data,
+            'building_label' => $selected_buildings->pluck('building_name')->all(),
+            'chart_data' => [75, 50, 5], // 物件別初回ログイン率
         ]);
     }
 
+
+    public function makeHorizontalData()
+    {
+        return [
+            'data' => [
+                [
+                    'title' => 'トップページ',
+                    'value' => 1000,
+                ], [
+                    'title' => 'スケジュール',
+                    'value' => 750,
+                ], [
+                    'title' => '画像ギャラリー',
+                    'value' => 500,
+                ], [
+                    'title' => 'オンライン紹介動画',
+                    'value' => 500,
+                    'children' => [
+                        [
+                        'title' => '〇〇サポート動画',
+                        'value' => 100,
+                        ],
+                    ],
+                ], [
+                    'title' => '物件資料集',
+                    'value' => 250,
+                    'children' => [
+                        [
+                            'title' => '資料-A',
+                            'value' => 150,
+                        ],
+                        [
+                            'title' => '資料-B',
+                            'value' => 100,
+                        ],
+                    ],
+                ], [
+                    'title' => '画像ギャラリー',
+                    'value' => 50,
+                ]
+            ],
+            'max_value' => 1000,
+        ];
+    }
 }
