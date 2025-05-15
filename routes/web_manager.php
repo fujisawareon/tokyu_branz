@@ -101,7 +101,6 @@ Route::prefix('manager')->group(function () {
             Route::post('share-content', [ProjectContentsController::class, 'shareContentUpdate']);
             Route::get('information', [ProjectContentsController::class, 'information'])->name('manager_project_information');
 
-
             // 各種コンテンツ管理
 
         });

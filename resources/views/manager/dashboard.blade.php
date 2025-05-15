@@ -88,7 +88,9 @@
             </div>
             <div class="element-horizontal-chart">
                 <span class="title">ポータルサイト資料請求数</span>
-                <div class="element-value"></div>
+                <div class="element-value">
+                    <x-horizontal-chart :data_list="$horizontal_data['data']" :max_value="$horizontal_data['max_value']"/>
+                </div>
             </div>
         </div>
     </div>

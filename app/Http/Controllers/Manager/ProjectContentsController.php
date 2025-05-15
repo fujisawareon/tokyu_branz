@@ -14,6 +14,7 @@ use App\Models\CustomerBuilding;
 use App\Services\BuildingService;
 use App\Services\BuildingSettingService;
 use App\Services\LimitedContentsShareService;
+use App\Services\ShareItemService;
 use App\Traits\FormTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Http\FormRequest;
@@ -30,6 +31,7 @@ class ProjectContentsController extends Controller
     private BuildingService $building_service;
     private BuildingSettingService $building_setting_service;
     private LimitedContentsShareService $limited_contents_share_service;
+    private ShareItemService $share_item_service;
 
     /**
      * コンストラクタ
@@ -39,6 +41,7 @@ class ProjectContentsController extends Controller
         $this->building_service = app(BuildingService::class);
         $this->building_setting_service = app(BuildingSettingService::class);
         $this->limited_contents_share_service = app(LimitedContentsShareService::class);
+        $this->share_item_service = app(ShareItemService::class);
     }
 
     /**
@@ -172,7 +175,6 @@ class ProjectContentsController extends Controller
      */
     public function actionBtnUpdate(Building $building, ActionBtnSettingUpdateRequest $request): RedirectResponse
     {
-
         try {
             // 物件サイトの更新
             $this->building_setting_service->upsertBuildingSetting($building, [
@@ -250,27 +252,36 @@ class ProjectContentsController extends Controller
         $status_list = $this->convertSelectArray($status_list);
 
         // 現在選択中のステータス
-        $selected_status = request()->query('status') ?? CustomerBuilding::STATUS_ENTRY;
+        $selected_status_id = request()->query('status') ?? CustomerBuilding::STATUS_ENTRY;
 
-        if (!in_array($selected_status, $status_keys)) {
+        if (!in_array($selected_status_id, $status_keys)) {
             dd('選択不可能な値の場合のエラー処理を作成する'); // TODO 選択不可能な値の場合はエラー
         }
 
         // コンテンツ
         $limited_content_list = $this->building_setting_service->getLimitedContentList($building->id);
-        $share_contents_list = $this->limited_contents_share_service->getShareContentsList($building->id, (int)$selected_status)
+        $share_contents_list = $this->limited_contents_share_service->getShareContentsList($building->id, (int)$selected_status_id)
             ->pluck('content_key')->all();
 
         // 間取り
+
         // 物件資料集
+
         // アクションボタン
+        $building->load([
+            'buildingSetting',
+            'actionBtnSetting',
+        ]);
+        $share_item_list = $this->share_item_service->getShareItemByStatusId($building->id, (int)$selected_status_id)
+            ->pluck('external_id')->all();
 
         return view('manager.project.contents.share-content', [
             'building' => $building,
             'status_list' => $status_list,
-            'selected_status' => $selected_status,
+            'selected_status_id' => $selected_status_id,
             'limited_content_list' => $limited_content_list,
             'share_contents_list' => $share_contents_list,
+            'share_item_list' => $share_item_list,
         ]);
     }
 
@@ -286,13 +297,17 @@ class ProjectContentsController extends Controller
         $status_id = (int)$request->status;
 
         try {
-            // コンテンツのシェア内容を一度削除
+            // 各シェア内容を一度削除 // TODO 削除するものに絞りたい
             $this->limited_contents_share_service->deleteShareContentsList($building->id, $status_id, $manager_id);
+            $this->share_item_service->deleteShareItemList($building->id, $status_id, $manager_id);
 
             // コンテンツのシェア内容を再登録
             if ($request->contents) {
                 $this->limited_contents_share_service->insertShareContentsList($building->id, $status_id, $manager_id, $request->contents);
             }
+
+            // アクションボタンのシェア内容を再登録
+            $this->share_item_service->updateShareContentsList($building->id, $status_id, $request->action_btn);
 
             return redirect()->route('manager_project_share_content', ['building' => $building->id, 'status' => $status_id])
                 ->with(SessionConst::FLASH_MESSAGE_SUCCESS, ['シェア内容を更新しました']);

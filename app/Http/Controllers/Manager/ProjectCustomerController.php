@@ -192,7 +192,6 @@ class ProjectCustomerController extends Controller
                 return CustomerBuilding::STATUS_LIST[$row->customer_status] ?? '';
             })
             ->make();
-
     }
 
     /**

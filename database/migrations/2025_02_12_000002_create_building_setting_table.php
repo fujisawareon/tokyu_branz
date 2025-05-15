@@ -36,7 +36,8 @@ return new class extends Migration
         });
 
 
-        Schema::create('building_setting_histories', function (Blueprint $table) {
+
+        Schema::create('building_setting_history', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('building_id')->comment('物件ID');
 
@@ -56,7 +57,7 @@ return new class extends Migration
             $table->timestamp('history_created_at')->useCurrent()->comment('履歴作成日時');
 
             // インデックス
-            $table->index(['building_id'], 'idx_building_setting_histories_building_id');
+            $table->index(['building_id'], 'idx_building_setting_history_building_id');
         });
 
         DB::unprepared('
@@ -64,7 +65,7 @@ return new class extends Migration
             AFTER UPDATE ON building_setting
             FOR EACH ROW
             BEGIN
-                INSERT INTO building_setting_histories (
+                INSERT INTO building_setting_history (
                     building_id,
                     sales_suspension_title,
                     sales_suspension_message,
@@ -103,6 +104,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('building_setting');
-        Schema::dropIfExists('building_setting_histories');
+        Schema::dropIfExists('building_setting_history');
     }
 };

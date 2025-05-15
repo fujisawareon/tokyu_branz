@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // アクションボタンの数をカウントし、追加ボタンの表示を制御する
     const updateAddButtonVisibility = () => {
         const count = $sortableList.children().length;
-        $addBtn.toggle(count < 5);
+        $addBtn.toggle(count < 4);
     };
 
     // 追加ボタンクリック時の処理

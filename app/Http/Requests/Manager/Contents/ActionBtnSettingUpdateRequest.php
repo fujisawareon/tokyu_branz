@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Manager\Contents;
 
-use App\Models\MasterData;
-use App\Repositories\Interfaces\MasterDataRepositoryInterface;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 /**
  * @property string $building_site_url
@@ -27,7 +24,7 @@ class ActionBtnSettingUpdateRequest extends FormRequest
     {
         return [
             // 物件サイト
-            'building_site_url' => ['nullable','url'],
+            'building_site_url' => ['required_if:building_site_display_flg,1', 'url'],
             'building_site_display_flg' => ['sometimes', 'in:1'],
 
             // アクションボタン
@@ -74,6 +71,7 @@ class ActionBtnSettingUpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'building_site_url.required_if' => '表示する場合はURLを設定して下さい。',
         ];
     }
 

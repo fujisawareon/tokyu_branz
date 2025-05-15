@@ -38,7 +38,7 @@
                         <x-input-select name="status"
                                         id="status"
                                         class="w-64"
-                                        :value="old('status', $selected_status)"
+                                        :value="old('status', $selected_status_id)"
                                         :options="$status_list"
                                         :error="$errors->has('status')"
                         />
@@ -49,7 +49,7 @@
 
             <form method="POST">
                 @csrf
-                <input type="hidden" name="status" value="{{ $selected_status }}">
+                <input type="hidden" name="status" value="{{ $selected_status_id }}">
                 <div class="grid" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem;">
                     <div class="border p-2">
                         <div class="border mb-2 p-2">
@@ -76,6 +76,32 @@
                     </div>
                     <div class="border p-2">
                         アクションボタン
+                        {{-- 物件サイト --}}
+                        @if($building->buildingSetting->building_site_display_flg)
+                            <div class="border-b p-1">
+                                <div style="width: max-content;">
+                                    <x-input-accepted-checkbox name="building_site"
+                                                               label="物件サイト"
+                                                               :checked="false"
+                                    />
+                                </div>
+                            </div>
+                        @endif
+
+                        {{-- アクションボタン --}}
+                        @foreach($building->actionBtnSetting as $action_btn_setting)
+                            @if($action_btn_setting->display_flg)
+                                <div class="border-b p-1">
+                                    <div style="width: max-content;">
+                                        <x-input-accepted-checkbox name="action_btn[]"
+                                                                   label="{{ $action_btn_setting['button_name'] }}"
+                                                                   value="{{ $action_btn_setting['id'] }}"
+                                                                   :checked="in_array($action_btn_setting['id'], $share_item_list)"
+                                        />
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="flex-center-center mt-2">

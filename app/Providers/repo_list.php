@@ -47,5 +47,8 @@ return [
     ], [
         'interface' => \App\Repositories\Interfaces\ShareContentStatusRepositoryInterface::class,
         'class' => \App\Repositories\ShareContentStatusRepository::class,
+    ], [
+        'interface' => \App\Repositories\Interfaces\ShareItemStatusRepositoryInterface::class,
+        'class' => \App\Repositories\ShareItemStatusRepository::class,
     ],
 ];

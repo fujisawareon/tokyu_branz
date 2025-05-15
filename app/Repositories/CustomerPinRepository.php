@@ -32,7 +32,6 @@ class CustomerPinRepository implements CustomerPinRepositoryInterface
      */
     public function create(array $param)
     {
-        Log::warning($param);
         return CustomerPin::create($param);
     }
 

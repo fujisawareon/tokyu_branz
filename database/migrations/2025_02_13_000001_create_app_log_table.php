@@ -18,7 +18,10 @@ return new class extends Migration
             $table->bigIncrements('id')->comment('限定コンテンツログID');
             $table->unsignedInteger('building_id')->default(0)->comment('物件ID');
             $table->unsignedInteger('customer_id')->default(0)->comment('顧客ID');
-            $table->tinyInteger('page_num')->default(0)->comment('閲覧ページNo.');
+            $table->string('uid')->comment('識別ID');
+            $table->string('page_key')->default('')->comment('限定コンテンツキー');
+            $table->integer('floor_plan_id')->nullable()->comment('間取プランID');
+            $table->integer('binder_building_id')->nullable()->comment('物件資料ID');
 
             $table->time('stay_time')->nullable()->default(null)->comment('滞在時間');
 
@@ -29,7 +32,8 @@ return new class extends Migration
             // インデックス
             $table->index(['building_id'], 'idx_app_log_building_id');
             $table->index(['customer_id'], 'idx_app_log_customer_id');
-            $table->index(['page_num'], 'idx_app_log_page_num');
+            $table->index(['created_at'], 'idx_app_log_created_at');
+
         });
     }
 
