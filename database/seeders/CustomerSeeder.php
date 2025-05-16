@@ -27,6 +27,6 @@ CustomerSeeder extends Seeder
             'email' => 'test@test.jp',
             'password' => static::$password ??= Hash::make('test'),
         ]);
-        Customer::factory(3000)->create();
+        Customer::factory(2000)->create();
     }
 }
