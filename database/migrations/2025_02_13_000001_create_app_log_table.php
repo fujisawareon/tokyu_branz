@@ -27,16 +27,15 @@ return new class extends Migration
             ip_address VARCHAR(255) COMMENT "IPアドレス",
             browser VARCHAR(255) COMMENT "ブラウザ",
             http_referer VARCHAR(500) NULL COMMENT "アクセス元",
-            created_at_partition DATE COMMENT "作成日時_パーティション用",
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "作成日時",
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT "作成日時",
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新日時",
             deleted_at TIMESTAMP NULL COMMENT "削除日時",
-            PRIMARY KEY (id, created_at_partition)
-        ) PARTITION BY RANGE COLUMNS (created_at_partition) (
-            PARTITION p2026 VALUES LESS THAN ("2027-01-01"),
-            PARTITION p2027 VALUES LESS THAN ("2028-01-01"),
-            PARTITION p2028 VALUES LESS THAN ("2029-01-01"),
-            PARTITION p2029 VALUES LESS THAN ("2030-01-01"),
+            PRIMARY KEY (id, created_at)
+        ) PARTITION BY RANGE (year(`created_at`)) (
+            PARTITION p2026 VALUES LESS THAN (2027),
+            PARTITION p2027 VALUES LESS THAN (2028),
+            PARTITION p2028 VALUES LESS THAN (2029),
+            PARTITION p2029 VALUES LESS THAN (2030),
             PARTITION pmax VALUES LESS THAN MAXVALUE
         );');
 
