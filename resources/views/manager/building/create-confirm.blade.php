@@ -16,6 +16,7 @@
             <form method="post" action="{{ route('manager_building_register') }}">
                 @csrf
                 @method('post')
+                <input type="hidden" name="flow_token" value="{{ $request['flow_token'] }}" >
                 <div class="item-row">
                     <div class="item-row-title">物件名</div>
                     <div class="item-row-content flex-start-center">{{ $request['building_name'] }}</div>
@@ -64,12 +65,12 @@
                 </div>
                 <div class="item-row">
                     <div class="item-row-title">所在</div>
-                    <div class="item-row-content flex-start-center">{{ $request['aaaaaaaa'] }}</div>
+                    <div class="item-row-content flex-start-center">{{ $request['location'] }}</div>
                 </div>
                 <div class="item-row">
                     <div class="item-row-title">最寄り</div>
                     <div class="item-row-content flex-start-center">
-                        {!! nl2br(e($request['bbbbbbbbbb'])) !!}
+                        {!! nl2br(e($request['nearest_station'])) !!}
                     </div>
                 </div>
                 <div style="display: flex;">
@@ -77,6 +78,7 @@
                 </div>
             </form>
         </div>
+
     </div>
 </x-app-manager-layout>
 

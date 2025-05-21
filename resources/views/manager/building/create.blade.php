@@ -77,7 +77,7 @@
                         <input type="file" name="top_image">
                         <x-input-error :messages="$errors->get('top_image')" class="mt-1"/>
                         <div class="support-msg">※限定コンテンツのTOP画像となります</div>
-                        <div class="support-msg">※登録可能な拡張子は.jpg, .jpeg, .pngとなります</div>
+                        <div class="support-msg">※登録可能な拡張子は.jpg, .jpeg, .png, .webpとなります</div>
                         <div class="support-msg">※ファイルサイズは5MBまでとなります</div>
                     </div>
                 </div>
@@ -94,18 +94,18 @@
                 <div class="item-row">
                     <div class="item-row-title">所在</div>
                     <div class="item-row-content">
-                        <x-input-text type="text" name="aaaaaaaa" class="w-80"
+                        <x-input-text type="text" name="location" class="w-80"
                                       id="" placeholder="東京都港区"
-                                      :value="old('aaaaaaaa')"
-                                      :error="$errors->has('aaaaaaaa')"/>
-                        <x-input-error :messages="$errors->get('aaaaaaaa')" class="mt-1"/>
+                                      :value="old('location')"
+                                      :error="$errors->has('location')"/>
+                        <x-input-error :messages="$errors->get('location')" class="mt-1"/>
                     </div>
                 </div>
                 <div class="item-row">
                     <div class="item-row-title">最寄り</div>
                     <div class="item-row-content">
-                        <textarea type="file" name="bbbbbbbbbb" class="input-box w-80" placeholder="都営新宿線〇〇駅徒歩〇〇分&#13;&#10;都営新宿線〇〇駅徒歩〇〇分">{{ old('bbbbbbbbbb') }}</textarea>
-                        <x-input-error :messages="$errors->get('bbbbbbbbbb')" class="mt-1"/>
+                        <textarea type="file" name="nearest_station" class="input-box w-80" placeholder="都営新宿線〇〇駅徒歩〇〇分&#13;&#10;都営新宿線〇〇駅徒歩〇〇分">{{ old('nearest_station') }}</textarea>
+                        <x-input-error :messages="$errors->get('nearest_station')" class="mt-1"/>
                     </div>
                 </div>
                 <div style="display: flex;">

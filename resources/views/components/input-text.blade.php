@@ -6,7 +6,7 @@
     'placeholder' => '',
     'disabled' => false,
     'error' => false,
-    'default_class' => 'input-box ',
+    'default_class' => 'input-box',
     'class' => '',
 ])
 

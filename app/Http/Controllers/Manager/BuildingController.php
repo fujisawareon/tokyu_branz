@@ -12,6 +12,8 @@ use App\Services\BuildingService;
 use App\Services\BuildingSettingService;
 use App\Traits\FormTrait;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -29,7 +31,7 @@ class BuildingController extends Controller
     /**
      * コンストラクタ
      */
-    public function __construct ()
+    public function __construct()
     {
         $this->building_service = app(BuildingService::class);
         $this->building_setting_service = app(BuildingSettingService::class);
@@ -89,8 +91,8 @@ class BuildingController extends Controller
             'building_8_digit_code',
             'building_4_digit_code',
             'contents_design_flg',
-            'aaaaaaaa', // TODO
-            'bbbbbbbbbb', // TODO
+            'location',
+            'nearest_station',
         ]);
 
         // ファイルを storage のtmpディレクトリに保存しておく
@@ -102,12 +104,16 @@ class BuildingController extends Controller
             $request_data['top_image'] = $top_image_file_name;
         }
 
+        // サムネイル画像の登録
         $thumbnail_image_file = $request->file('thumbnail_image');
         $thumbnail_image_file_name = 'thumbnail_image_' . time() . '_' . $thumbnail_image_file->getClientOriginalName(); // タイムスタンプ付きで保存
         $thumbnail_image_file->storeAs('tmp', $thumbnail_image_file_name, 'public');
         $request_data['thumbnail_image'] = $thumbnail_image_file_name;
 
-        session()->put(SessionConst::BUILDING_CREATE_DATA, $request_data);
+        $token = Str::uuid(); // LaravelのStrヘルパーでユニークID生成
+        $request_data['flow_token'] = $token;
+
+        session()->put(SessionConst::BUILDING_CREATE_DATA . '_' . $token, $request_data);
 
         return view('manager.building.create-confirm', [
             'request' => $request_data,
@@ -118,15 +124,17 @@ class BuildingController extends Controller
      * 物件登録処理を行なう
      * @return RedirectResponse
      */
-    public function register(): RedirectResponse
+    public function register(FormRequest $request): RedirectResponse
     {
-        if (!session()->has(SessionConst::BUILDING_CREATE_DATA)) {
+        $token = $request->input('flow_token');
+        $request_data = session()->pull(SessionConst::BUILDING_CREATE_DATA . '_' . $token);
+
+        // セッションが空の場合
+        if (empty($request_data)) {
             return redirect()->route('manager_building_create')->with(SessionConst::FLASH_MESSAGE_ERROR, ['リクエストデータが不正です']);
         }
 
         try {
-            $request_data = session()->get(SessionConst::BUILDING_CREATE_DATA);
-
             $building = $this->building_service->store($request_data);
 
             // 画像の移動

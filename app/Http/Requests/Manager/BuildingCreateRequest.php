@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
  * @property string $building_4_digit_code
  * @property int $site_url_flg
  * @property string $site_url
- * @property int $contents_url_flg
+ * @property int $contents_design_flg
  * @property $top_image TODO
  * @property $thumbnail_image
  */
@@ -27,12 +27,14 @@ class BuildingCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'building_name' => ['required', 'string', 'between:1,50', 'unique:buildings,building_name',],
+            'building_name' => ['required', 'string', 'max:60', 'unique:buildings,building_name',],
             'building_8_digit_code' => ['required', 'string', 'regex:/^[a-zA-Z0-9_]+$/', 'size:8',],
             'building_4_digit_code' => ['required', 'string', 'regex:/^[a-zA-Z0-9_]+$/', 'size:4',],
             'contents_design_flg' => ['required', Rule::in(array_keys(\App\Consts\CommonConsts::CUSTOM_TYPE)),],
-            'top_image' => ['required_if:contents_design_flg,0', 'image', 'max:10240', ],
-            'thumbnail_image' => ['required', 'image', 'max:10240', ],
+            'top_image' => ['required_if:contents_design_flg,0', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120',],
+            'thumbnail_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048',],
+            'location' => ['nullable', 'string', 'max:100', 'regex:/^[ぁ-んァ-ヶー一-龠ａ-ｚＡ-Ｚa-zA-Z0-9０-９々〆〤\s\-ー・。、]+$/u',],
+            'nearest_station' => ['nullable', 'string', 'max:1000', 'regex:/^[ぁ-んァ-ヶー一-龠ａ-ｚＡ-Ｚa-zA-Z0-9０-９々〆〤\s\-ー・。、]+$/u',],
         ];
     }
 

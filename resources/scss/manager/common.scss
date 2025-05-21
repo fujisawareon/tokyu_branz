@@ -255,10 +255,11 @@ span.current-page {
 
   &.error {
     border-color: red;
+    background: #fff2f2;
   }
 
   &:disabled {
-    background: #eee; /* 薄いグレー */
+    background: #eee;
     cursor: not-allowed; /* カーソルを禁止マークに */
   }
 }
