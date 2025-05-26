@@ -44,6 +44,7 @@ class BuildingService
     }
 
     /**
+     * 物件に対する各分析情報を取得する
      * @param array $building_ids
      * @return array
      */
@@ -52,7 +53,7 @@ class BuildingService
         // エントリー数
         $entry_count = $this->customer_repository->getEntryCustomerCountByBuildingIds($building_ids);
 
-        // 登録数
+        // 登録数 TODO
 
         // 閲覧ページ数
         $view_count = $this->app_log_repository->getViewCountByBuildingIds($building_ids);

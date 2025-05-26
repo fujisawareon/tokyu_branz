@@ -22,7 +22,7 @@ class MasterDataRepository implements MasterDataRepositoryInterface
     public function getMasterDataByDataType(int $type): Collection
     {
         $key_name = $this->makeKeyName(CacheConsts::KEY_NAME_TYPE_MASTER_DATA, [
-            'type' =>$type,
+            'type' => $type,
         ]);
 
         // キャッシュにあればそのまま利用する

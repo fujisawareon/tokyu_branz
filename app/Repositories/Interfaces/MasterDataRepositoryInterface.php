@@ -12,6 +12,7 @@ interface MasterDataRepositoryInterface
 
     /**
      * データタイプによるマスターデータを取得する
+     * ※キャッシュにある場合はキャッシュから取得する
      * @param int $type
      * @return Collection<int, MasterData>
      */

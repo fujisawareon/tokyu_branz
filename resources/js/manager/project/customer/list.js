@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         // WEB顧客ID
                         data: 'web_customer_id',
                         name: 'web_customer_id',
-                        orderable: true,  // ← ソート
-                        searchable: false  // ← ついでに検索も無効にする場合
+                        orderable: true,
+                        searchable: false
                     },
                     {
                         // 名前
@@ -192,18 +192,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ? `<path d="m634-448 86 77v60H510v241l-30 30-30-30v-241H240v-60l80-77v-332h-50v-60h414v60h-50v332Z" fill-rule="evenodd"/>`
                                 : `<path d="m634-448 86 77v60H510v241l-30 30-30-30v-241H240v-60l80-77v-332h-50v-60h414v60h-50v332Zm-313 77h312l-59-55v-354H380v354l-59 55Zm156 0Z"/>`;
                             return `
-                        <div class="flex-center-center">
-                            <button class="pin-btn" data-id="${row.id}">
-                                <svg class="rotated-icon" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px"
-                                     viewBox="0 -960 960 960" fill="var(--manager-main-color)">
-                                     ${path}
-                                </svg>
-                            </button>
-                        </div>
-                    `;
+                                <div class="flex-center-center">
+                                    <button class="pin-btn" data-id="${row.id}">
+                                        <svg class="rotated-icon" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px"
+                                             viewBox="0 -960 960 960" fill="var(--manager-main-color)">
+                                             ${path}
+                                        </svg>
+                                    </button>
+                                </div>
+                            `;
                         },
-
-                        orderable: false,    // ユーザーによるソート不要
+                        orderable: false,
                         searchable: false,
                     },
                 ]
@@ -254,8 +253,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         // WEB顧客ID
                         data: 'web_customer_id',
                         name: 'web_customer_id',
-                        orderable: true,  // ← ソート
-                        searchable: false  // ← ついでに検索も無効にする場合
+                        orderable: true,
+                        searchable: false
                     }, {
                         // 詳細  // TODO URL作成したら修正する事
                         data: 'actions',
@@ -277,7 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div>${fullName}</div>`;
                         },
                         searchable: false // 検索対象外にしたい場合
-
                     }, {
                         // 担当
                         name: 'person_in_charge',

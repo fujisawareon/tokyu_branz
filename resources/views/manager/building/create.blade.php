@@ -71,7 +71,7 @@
                         <div class="support-msg">※カスタムデザインをする場合はさら社にご依頼ください</div>
                     </div>
                 </div>
-                <div class="item-row" id="sssssssssss">
+                <div class="item-row" id="top_image">
                     <div class="item-row-title require">TOP画像</div>
                     <div class="item-row-content">
                         <input type="file" name="top_image">

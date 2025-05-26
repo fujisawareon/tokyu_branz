@@ -16,7 +16,7 @@ Alpine.start();
 document.addEventListener("DOMContentLoaded",() => {
 
     ToggleHandler.onClickHiddenMultipleConditions([
-        '#sssssssssss',
+        '#top_image',
     ], [
         ['contents_design_flg', '0'],
     ]);

@@ -63,12 +63,9 @@ class ProjectContentsController extends Controller
      */
     public function salesStatus(Building $building): View
     {
-        $status_list = $this->convertSelectArray(Building::SALES_STATUS);
-        $building->load('buildingSetting');
-
         return view('manager.project.contents.sales-status', [
-            'building' => $building,
-            'sales_status' => $status_list,
+            'building' => $building->load('buildingSetting'),
+            'sales_status' => $this->convertSelectArray(Building::SALES_STATUS),
         ]);
     }
 
@@ -86,8 +83,8 @@ class ProjectContentsController extends Controller
                 'sales_status' => $request->sales_status,
             ]);
 
+            // 販売中ではない場合、メッセージを更新する
             if ($request->sales_status <> Building::SALES_STATUS_ON_SALE) {
-                // 販売中止時のメッセージを更新
                 $this->building_setting_service->upsertBuildingSetting($building, [
                     'sales_suspension_title' => $request->title,
                     'sales_suspension_message' => $request->message,

@@ -128,7 +128,7 @@
                 </div>
                 <div style="flex: 1">
                     @verbatim
-                        <input type="text" name="url[${id}]" class="input-box w-full" id="url[${id}]" placeholder="URL" required>
+                        <input type="url" name="url[${id}]" class="input-box w-full" id="url[${id}]" placeholder="URL" required>
                     @endverbatim
                 </div>
                 <div style="width: 65px;" class="flex-center-center">

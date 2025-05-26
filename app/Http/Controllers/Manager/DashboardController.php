@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
-use App\Models\Building;
 use App\Services\AppLogService;
 use App\Services\BuildingService;
 use App\Services\DashboardService;
@@ -56,7 +55,6 @@ class DashboardController extends Controller
             'chart_data' => [75, 50, 5], // 物件別初回ログイン率
         ]);
     }
-
 
     public function makeHorizontalData()
     {

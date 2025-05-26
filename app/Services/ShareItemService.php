@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\MasterData;
 use App\Repositories\Interfaces\ShareItemStatusRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ class ShareItemService
             $records[] = [
                 'building_id' => $building_id,
                 'status_id' => $status_id,
-                'data_type' => 1, // TODO
+                'data_type' => MasterData::LIMITED_CONTENT,
                 'external_id' => $action_btn_id,
                 'created_by' => Auth::guard('managers')->user()->id,
             ];

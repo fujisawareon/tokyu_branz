@@ -36,7 +36,6 @@ $error_list = session(\App\Consts\SessionConst::FLASH_MESSAGE_ERROR);
                 @endforeach
             @endif
 
-
         </div>
     </div>
 @endif

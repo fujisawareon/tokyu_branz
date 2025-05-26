@@ -49,26 +49,19 @@ trait FormTrait
     private function convertSelectArray(array $list, ?string $value_name = null, ?string $label_name = null, array $first_item = []): array
     {
         $array = [];
-        // 一番最初に入れたい要素があれば追加しておく ※「選択してください」等の要素
+        // 最初に追加する項目（例：「選択してください」等）
         if ($first_item) {
             $array[] = [
                 'value' => $first_item['value'],
                 'label' => $first_item['label'],
             ];
         }
+
         foreach ($list as $key => $item) {
-            $data = [];
-            if ($value_name) {
-                $data['value'] = $item[$value_name];
-            } else {
-                $data['value'] = $key;
-            }
-            if ($label_name) {
-                $data['label'] = $item[$label_name];
-            } else {
-                $data['label'] = $item;
-            }
-            $array[] = $data;
+            $array[] = [
+                'value' => $value_name ? ($item[$value_name] ?? null) : $key,
+                'label' => $label_name ? ($item[$label_name] ?? null) : $item,
+            ];
         }
         return $array;
     }

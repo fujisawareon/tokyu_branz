@@ -24,7 +24,7 @@ class ActionBtnSettingUpdateRequest extends FormRequest
     {
         return [
             // 物件サイト
-            'building_site_url' => ['required_if:building_site_display_flg,1', 'url'],
+            'building_site_url' => ['nullable', 'required_if:building_site_display_flg,1', 'url'],
             'building_site_display_flg' => ['sometimes', 'in:1'],
 
             // アクションボタン
