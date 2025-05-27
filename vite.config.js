@@ -7,11 +7,11 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/manager/app.css',
                 'resources/js/app.js',
                 'resources/js/common/daterangepicker.js',
                 'resources/js/common/datatables.js',
                 'resources/js/common/sortable.js',
+                'resources/js/customer_app.js',
                 'resources/js/manager_app.js',
                 'resources/js/manager_project.js',
 

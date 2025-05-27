@@ -38,7 +38,7 @@ Route::prefix('manager')->group(function () {
         Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('manager_password_confirm');
         Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
         Route::put('password', [PasswordController::class, 'update'])->name('manager_password');
-        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('manager_logout');
+        Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->name('manager_logout');
 
         Route::get('dashboard', DashboardController::class)->name('manager_dashboard');
         Route::post('dashboard', DashboardController::class)->name('manager_dashboard');

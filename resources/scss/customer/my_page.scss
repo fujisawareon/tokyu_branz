@@ -1,0 +1,28 @@
+
+.building-box {
+  padding: .25rem;
+  margin: 1rem 0 2rem;
+  border: solid 1px #eeee;
+  box-shadow: #dddd 5px 5px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-btn {
+  padding: .5rem 1rem;
+  background: var(--manager-main-color);
+  border: solid 1px var(--manager-main-color);
+  border-radius: .25rem;
+  color: white;
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: .2s;
+
+  &:hover {
+    background: white;
+    padding: .5rem 1rem;
+    color: var(--manager-main-color);
+
+  }
+}

@@ -1,0 +1,48 @@
+
+:root {
+  --manager-main-color: #001C51;
+  --manager-hover-color: #e5f0ff;
+  --header-height: 50px;
+}
+
+.container-position {
+  width: 95%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.header {
+  border-bottom: solid 1px var(--manager-main-color);
+  height: var(--header-height);
+
+  & .logo {
+    font-family: Serif, serif;
+    color: var(--manager-main-color);
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+.view-name-area {
+  height: 50px;
+  background: var(--manager-main-color);
+  color: white;
+
+  & > .container-position {
+    height: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+}
+
+
+.page-contents-area {
+  flex: 1;
+  background: #f5f9ff;
+  padding: .5rem;
+}
+
