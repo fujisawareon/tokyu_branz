@@ -13,13 +13,6 @@ use Illuminate\Support\Collection as CollectionAlias;
 interface CustomerRepositoryInterface
 {
     /**
-     * 複数物件のエントリー数を取得する
-     * @param array $building_ids
-     * @return CollectionAlias<array>
-     */
-    public function getEntryCustomerCountByBuildingIds(array $building_ids): CollectionAlias;
-
-    /**
      * @param array $param
      * @return Customer
      */

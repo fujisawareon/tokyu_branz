@@ -20,18 +20,4 @@ class AppLogRepository implements AppLogRepositoryInterface
         return AppLog::whereIn('building_id', $building_ids)->count();
     }
 
-    /**
-     * @inheritDoc
-     * @see AppLogRepositoryInterface::getViewCountByBuildingIds()
-     */
-    public function getViewCountByBuildingIds(array $building_ids)
-    {
-        return AppLog::select('building_id', DB::raw('COUNT(*) as view_count'))
-            ->whereIn('building_id', $building_ids)
-            ->groupBy('building_id')
-            ->orderBy('building_id')
-            ->pluck('view_count', 'building_id');
-
-    }
-
 }

@@ -423,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadTable()
     });
 
-    // リセトボタン押下時
+    // resetボタン押下時
     $('#reset_button').on('click', function () {
         console.log('作成中');
     });

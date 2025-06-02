@@ -24,4 +24,8 @@ export class Datatables {
         return '<"top"ipl>t<"bottom"ip><"clear">';
     }
 
+    static lengthMenu() {
+        return [[10, 20, 50, 100], [10, 20, 50, 100]];
+    }
+
 }

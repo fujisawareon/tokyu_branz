@@ -1,5 +1,11 @@
 <x-app-manager-layout>
 
+    <x-slot name="js">
+        @vite([
+            'resources/js/manager/building_list.js',
+        ])
+    </x-slot>
+
     <x-slot name="breadcrumb">
         <ol>
             <li><a href="{{ route('manager_dashboard') }}" class="link">{{ __('Dashboard') }}</a></li>
@@ -17,61 +23,59 @@
         </div>
 
         <div class="my-4">
-            <form method="post" action="">
-                @csrf
-                @method('post')
-
-                @php $building_name = $conditions['building_name']?? ''; @endphp
-                <input type="text" name="building_name" class="input-box" value="{{ $building_name }}" placeholder="物件名">
-                <select class="input-box">
-                    @foreach($status_list as $status)
-                        <option value="{{ $status['value'] }}" >{{ $status['label'] }}</option>
-                    @endforeach
-                </select>
-                <input type="submit" class="btn" value="検索">
-            </form>
+            <input type="text" name="building_name" id="building_name" class="input-box" value="" placeholder="物件名">
+            <select class="input-box" id="sales_status">
+                @foreach($status_list as $status)
+                    <option value="{{ $status['value'] }}" >{{ $status['label'] }}</option>
+                @endforeach
+            </select>
+            <input type="submit" class="btn min" id="search_button" value="検索">
         </div>
 
-        <div style="width: 900px;">
-            {{ $building_list->appends(request()->input()) }}
-            <table class="list-tbl">
+        <div style="width: 1000px">
+            <table id="customers_table" class="display nowrap list-tbl customer-list-tbl"
+                   data-url="{{ route('manager_get_building_list') }}"
+                   >
+                <thead>
                 <tr>
                     <th>物件名</th>
-                    <th style="width: 120px;">販売ステータス</th>
-                    <th style="width: 120px;">エントリー数</th>
-                    <th style="width: 120px;">登録数</th>
-                    <th style="width: 120px;">閲覧ページ数</th>
-                    <th style="width: 90px;">物件設定</th>
+                    <th style="width: 150px;">販売ステータス</th>
+                    <th style="width: 130px;">エントリー数</th>
+                    <th style="width: 130px;">登録数</th>
+                    <th style="width: 130px;">閲覧ページ数</th>
+                    <th style="width: 100px;">編集</th>
                 </tr>
-                @foreach($building_list as $building)
-                    <tr>
-                        <td>
-                            <a href="{{ route('manager_project_home', ['building' => $building->id]) }}" class="link">{{ $building->building_name }}</a>
-                        </td>
-                        <td class="text-center">{{ \App\Models\Building::SALES_STATUS[$building->sales_status] }}</td>
-                        <td class="text-right num-count">
-                            @if(isset($analytics_data['entry_count'][$building->id]))
-                                {{ number_format($analytics_data['entry_count'][$building->id]) }}<span class="unit">名</span>
-                            @else
-                                0<span class="unit">名</span>
-                            @endif
-                        </td>
-
-                        <td class="text-right">0名</td>
-
-                        <td class="text-right num-count">
-                            @if(isset($analytics_data['view_count'][$building->id]))
-                                {{ number_format($analytics_data['view_count'][$building->id]) }}<span class="unit">PV</span>
-                            @else
-                                0<span class="unit">PV</span>
-                            @endif
-                        </td>
-                        <td class="text-center">
-                            <a href="{{ route('manager_building_basic_setting', ['building' => $building->id]) }}" class="btn min">設定</a>
-                        </td>
-                    </tr>
-                @endforeach
+                </thead>
             </table>
         </div>
     </div>
 </x-app-manager-layout>
+
+<style>
+
+    {{-- TODO 共通化したい --}}
+    .top,
+    .bottom {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: .25rem;
+        margin-top: .25rem;
+
+        .dt-paging-button {
+            border: solid 1px #bbb !important;
+        }
+    }
+
+    .table-number {
+        font-variant-numeric: tabular-nums;
+    }
+
+    table.dataTable thead th.text-center {
+        text-align: center !important;
+    }
+
+    table.dataTable thead th.text-right {
+        text-align: right !important;
+    }
+</style>

@@ -25,23 +25,6 @@ class BuildingRepository implements BuildingRepositoryInterface
 
     /**
      * @inheritDoc
-     * @see BuildingRepositoryInterface::getAllBuildings()
-     */
-    public function getAllBuildings(array $conditions): LengthAwarePaginator
-    {
-
-        $query = Building::orderBy('created_at', 'desc')
-            ->orderBy('id', 'asc');
-
-        if (!empty($conditions['building_name'])) {
-            $query = $this->setLikeWhere($query, 'building_name', $conditions['building_name']);
-        }
-
-        return $query->paginate(30);
-    }
-
-    /**
-     * @inheritDoc
      * @see BuildingRepositoryInterface::create()
      */
     public function create(array $request_data): Building

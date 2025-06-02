@@ -17,12 +17,6 @@ interface BuildingRepositoryInterface
     public function getBuildings(): Collection;
 
     /**
-     * 販売中の物件を取得する
-     * @return LengthAwarePaginator<int, Building>
-     */
-    public function getAllBuildings(array $conditions): LengthAwarePaginator;
-
-    /**
      * 物件の登録を行う
      * @param array $request_data
      * @return Building

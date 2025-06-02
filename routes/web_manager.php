@@ -47,7 +47,7 @@ Route::prefix('manager')->group(function () {
 
         Route::prefix('building')->middleware('auth.building')->group(function () {
             Route::get('list', [BuildingController::class, 'index'])->name('manager_building_list');
-            Route::post('list', [BuildingController::class, 'index'])->name('manager_building_search');
+            Route::get('get-building-list', [BuildingController::class, 'getBuildingList'])->name('manager_get_building_list');
             Route::get('create', [BuildingController::class, 'create'])->name('manager_building_create');
             Route::post('create', [BuildingController::class, 'createConfirm'])->name('manager_building_create_confirm');
             Route::post('register', [BuildingController::class, 'register'])->name('manager_building_register');

@@ -13,20 +13,6 @@ class CustomerRepository implements CustomerRepositoryInterface
 {
     /**
      * @inheritDoc
-     * @see CustomerRepositoryInterface::getEntryCustomerCountByBuildingIds()
-     */
-    public function getEntryCustomerCountByBuildingIds(array $building_ids): \Illuminate\Support\Collection
-    {
-        return CustomerBuilding::select('building_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('building_id', $building_ids)
-            ->groupBy('building_id')
-            ->orderBy('building_id')
-            ->pluck('count', 'building_id');
-    }
-
-
-    /**
-     * @inheritDoc
      * @see CustomerRepositoryInterface::createCustomer()
      */
     public function createCustomer(array $param): Customer

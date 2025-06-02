@@ -11,7 +11,7 @@
            <a href=""
                class="navigation-btn @if($num == 4) active @endif">アクセスログ</a>
         </div>
-        <a class="navigation-btn active">プレゼンモード</a>
+        <a href="{{ route('contents_manager', ['building' => $building->id, 'page_name' => 'top',]) }}" class="navigation-btn active" target="_blank">プレゼンモード</a>
     </div>
 </div>
 

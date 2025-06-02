@@ -9,7 +9,7 @@ use App\Models\Building;
 /**
  *
  */
-class CustomerLimitedContentController extends LimitedContentController
+class ManagerLimitedContentController extends LimitedContentController
 {
     public function __construct()
     {

@@ -8,6 +8,7 @@ use App\Consts\SessionConst;
 use App\Http\Requests\Manager\BuildingCreateRequest;
 use App\Http\Requests\Manager\BuildingUpdateRequest;
 use App\Models\Building;
+use App\Models\CustomerBuilding;
 use App\Services\BuildingService;
 use App\Services\BuildingSettingService;
 use App\Traits\FormTrait;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
+use Yajra\DataTables\Facades\DataTables;
 
 class BuildingController extends Controller
 {
@@ -42,27 +44,32 @@ class BuildingController extends Controller
      * @param Request $request
      * @return View
      */
-    public function index(Request $request): View
+    public function index(): View
     {
-        $conditions = [];
-        if (isset($request['building_name']) && !empty($request['building_name'])) {
-            $conditions['building_name'] = $request['building_name'];
-        }
-
-        $building_list = $this->building_service->getAllBuildings($conditions);
-        $analytics_data = $this->building_service->getAnalyticsData($building_list->pluck('id')->all());
-
         $status_list = $this->convertSelectArray(Building::SALES_STATUS, null, null, [
             'value' => null,
             'label' => '販売ステータスを選択してください',
         ]);
 
         return view('manager.building.list', [
-            'building_list' => $building_list,
             'status_list' => $status_list,
-            'conditions' => $conditions,
-            'analytics_data' => $analytics_data,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function getBuildingList(Request $request)
+    {
+        $query = $this->building_service->makeBuildingGetQuery($request->all());
+
+        return DataTables::of($query)
+            ->addColumn('sales_status_name', function ($row) {
+                return Building::SALES_STATUS[$row->sales_status] ?? '';
+            })
+            ->make();
     }
 
     /**

@@ -17,7 +17,9 @@
                     <div class="">
                         <a href="{{ route('contents_customer', [
                                 'building' => $building->id,
-                                'page_name' => 'top']) }}" class="content-btn">限定コンテンツ</a>
+                                'page_name' => 'top']) }}"
+                           class="content-btn"
+                           target="_blank">限定コンテンツ</a>
                     </div>
                 </div>
             @endforeach

@@ -16,4 +16,16 @@ class LimitedContentController extends Controller
         $this->building_service = app(BuildingService::class);
     }
 
+    protected function getContentsMenu()
+    {
+        return [
+            'top',
+            '間取り',
+        ];
+    }
+
+    protected function getPageData()
+    {
+        return [];
+    }
 }

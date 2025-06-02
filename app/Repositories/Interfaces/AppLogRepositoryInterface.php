@@ -14,9 +14,4 @@ interface AppLogRepositoryInterface
      */
     public function getTotalViewCountByBuildingIds(array $building_ids);
 
-    /**
-     * @param array $building_ids
-     */
-    public function getViewCountByBuildingIds(array $building_ids);
-
 }
