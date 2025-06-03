@@ -14,7 +14,7 @@
 
     <div class="main-contents">
         <div style="width: 700px;padding: 1rem 0;">
-            <form method="post" action="{{ route('manager_building_create_confirm') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('manager_building_create_confirm') }}" enctype="multipart/form-data">
                 @csrf
                 @method('post')
 

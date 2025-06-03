@@ -16,6 +16,7 @@ use App\Http\Controllers\Manager\BuildingController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\ProjectCustomerController;
 use App\Http\Controllers\Manager\ProjectContentsController;
+use App\Http\Controllers\Manager\LimitedContents\ImageGalleryController;
 use App\Http\Controllers\Manager\ProjectHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -102,7 +103,10 @@ Route::prefix('manager')->group(function () {
             Route::get('information', [ProjectContentsController::class, 'information'])->name('manager_project_information');
 
             // 各種コンテンツ管理
-
+            Route::get('image_gallery', [ImageGalleryController::class, 'index'])->name('manager_project_image_gallery');
+            Route::post('add_image_gallery', [ImageGalleryController::class, 'addImage'])->name('manager_project_image_gallery_add');
+            Route::get('/image_gallery/{filename}', [ImageGalleryController::class, 'show'])
+                ->name('manager_project_image_gallery_show');
         });
 
     });

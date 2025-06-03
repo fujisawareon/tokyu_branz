@@ -28,7 +28,7 @@
             @include('layouts.manager.flash_message')
             <div class="page-name">販売ステータス設定</div>
 
-            <form method="post" action="">
+            <form method="POST" action="">
                 @csrf
                 @method('post')
 

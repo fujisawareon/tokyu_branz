@@ -37,7 +37,7 @@
                 <a href="" class="option">平面図眺望<br>シミュレーション</a>
                 <a href="" class="option">日影シミュレーション</a>
                 <a href="" class="option">外観、共用部VR</a>
-                <a href="">画像ギャラリー</a>
+                <a href="{{ route('manager_project_image_gallery', ['building' => $building->id]) }}">画像ギャラリー</a>
                 <a href="" class="option">家具レイアウト<br>シミュレーション</a>
                 <a href="">周辺マップ</a>
                 <a href="">現地写真</a>

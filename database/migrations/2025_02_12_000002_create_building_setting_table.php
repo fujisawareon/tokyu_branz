@@ -25,6 +25,13 @@ return new class extends Migration
             $table->string('building_site_url', 255)->default('')->comment('物件サイトURL');
             $table->boolean('building_site_display_flg')->default(0)->comment('物件サイト表示フラグ');
 
+            $table->string('image_gallery_annotation', 5000)->nullable()->default(null)->comment('画像ギャラリー注釈文');
+            $table->string('environment_image_pass', 255)->nullable()->default(null)->comment('間取環境性能画像');
+            $table->string('annotation_text', 5000)->nullable()->default(null)->comment('間取注釈文');
+            $table->string('area_map_address', 1000)->nullable()->default(null)->comment('周辺マップ住所');
+            $table->decimal('area_map_latitude', 10, 7)->nullable()->default(null)->comment('周辺マップ緯度');
+            $table->decimal('area_map_longitude', 11, 7)->nullable()->default(null)->comment('周辺マップ経度');
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('作成日時');
             $table->integer('created_by')->comment('作成者');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'))->comment('更新日時');

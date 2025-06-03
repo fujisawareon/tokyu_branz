@@ -29,7 +29,7 @@
             @include('layouts.manager.flash_message')
             <div class="page-name">限定コンテンツ設定</div>
 
-            <form method="post" action="">
+            <form method="POST" action="">
                 @csrf
 
                 <div class="list-element mb-2">

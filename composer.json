@@ -7,10 +7,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-mbstring": "*",
+        "intervention/image": "^3.11",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
-        "yajra/laravel-datatables-oracle": "^11.1",
-        "ext-mbstring": "*"
+        "yajra/laravel-datatables-oracle": "^11.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",

@@ -13,7 +13,7 @@
 
     <div class="main-contents">
         <div style="width: 700px;padding: 1rem 0;">
-            <form method="post" action="{{ route('manager_building_register') }}">
+            <form method="POST" action="{{ route('manager_building_register') }}">
                 @csrf
                 @method('post')
                 <input type="hidden" name="flow_token" value="{{ $request['flow_token'] }}" >

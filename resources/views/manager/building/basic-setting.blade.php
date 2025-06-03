@@ -18,7 +18,7 @@
 
     <div class="main-contents">
         <div style="width: 900px;padding: 1rem 0;">
-            <form method="post" action="{{ route('manager_building_update', ['building' => $building->id]) }}">
+            <form method="POST" action="{{ route('manager_building_update', ['building' => $building->id]) }}">
                 @csrf
                 @method('post')
 
