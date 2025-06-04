@@ -27,7 +27,7 @@ class ManagerLimitedContentController extends LimitedContentController
         }
 
         // 閲覧画面に必要なデータを取得
-        $contents_data = $this->getPageData($building->id, $page_name, true);
+        $contents_data = $this->getPageData($building, $page_name, true);
 
         return view('limited_contents.' . $page_name, [
             'building' => $building,

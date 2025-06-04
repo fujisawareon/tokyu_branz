@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property string $building_name
  * @property string $building_code
+ * @property string $image_gallery_annotation
  * @property int $ip_restriction_flg
  * @property int $sales_status
  * @property int $unit_count

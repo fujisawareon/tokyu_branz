@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
+use App\Models\Building;
 use App\Models\MasterData;
 use App\Repositories\Interfaces\MasterDataRepositoryInterface;
 use App\Services\BuildingService;
@@ -67,21 +68,23 @@ class LimitedContentController extends Controller
      * @param bool $presentation_mode
      * @return array
      */
-    protected function getPageData(int $building_id, string $page_name, bool $presentation_mode = false)
+    protected function getPageData(Building $building, string $page_name, bool $presentation_mode = false)
     {
         return match ($page_name) {
-            'image_gallery' => $this->getImageGallery($building_id),
+            'image_gallery' => $this->getImageGallery($building),
             default => [],
         };
     }
 
     /**
-     * @param int $building_id
-     * @return mixed
+     * @param Building $building
+     * @return array
      */
-    private function getImageGallery(int $building_id)
+    private function getImageGallery(Building $building): array
     {
-        $image_gallery_service = app(ImageGalleryService::class);
-        return $image_gallery_service->getByBuildingId($building_id);
+        return [
+            'image_gallery_annotation' => $building->buildingSetting->image_gallery_annotation,
+            'image_gallery' => (new ImageGalleryService())->getByBuildingId($building->id),
+        ];
     }
 }
