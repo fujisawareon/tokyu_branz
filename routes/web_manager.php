@@ -103,10 +103,12 @@ Route::prefix('manager')->group(function () {
             Route::get('information', [ProjectContentsController::class, 'information'])->name('manager_project_information');
 
             // 各種コンテンツ管理
-            Route::get('image_gallery', [ImageGalleryController::class, 'index'])->name('manager_project_image_gallery');
-            Route::post('add_image_gallery', [ImageGalleryController::class, 'addImage'])->name('manager_project_image_gallery_add');
-            Route::get('/image_gallery/{filename}', [ImageGalleryController::class, 'show'])
-                ->name('manager_project_image_gallery_show');
+            Route::prefix('image_gallery')->group(function () {
+                Route::get('', [ImageGalleryController::class, 'index'])->name('manager_project_image_gallery');
+                Route::post('add', [ImageGalleryController::class, 'addImage'])->name('manager_project_image_gallery_add');
+                Route::post('update', [ImageGalleryController::class, 'update'])->name('manager_project_image_gallery_update');
+                Route::delete('{image_gallery}/delete', [ImageGalleryController::class, 'delete'])->name('manager_project_image_gallery_delete');
+            });
         });
 
     });

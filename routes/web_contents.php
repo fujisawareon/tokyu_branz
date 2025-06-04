@@ -16,7 +16,6 @@ Route::prefix('contents')->group(function () {
 
     Route::middleware('auth:customers')->group(function () {
         Route::prefix('customer')->group(function () {
-
             Route::get('{building}/{page_name}', CustomerLimitedContentController::class)->name('contents_customer');
         });
     });

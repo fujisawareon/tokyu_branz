@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/common.css';
+import '../scss/common.scss';
 import '../scss/manager/common.scss';
 import '../scss/manager/base.scss';
 import './common.js';

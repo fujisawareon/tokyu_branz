@@ -6,9 +6,13 @@ namespace App\Http\Controllers\Manager\LimitedContents;
 
 use App\Consts\SessionConst;
 use App\Models\Building;
+use App\Models\ImageGallery;
 use App\Services\ImageGalleryService;
+use App\Services\BuildingSettingService;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -21,6 +25,7 @@ use Throwable;
 class ImageGalleryController extends Controller
 {
     private ImageGalleryService $image_gallery_service;
+    private BuildingSettingService $building_setting_service;
 
     /**
      * コンストラクタ
@@ -28,6 +33,7 @@ class ImageGalleryController extends Controller
     public function __construct()
     {
         $this->image_gallery_service = app(ImageGalleryService::class);
+        $this->building_setting_service = app(BuildingSettingService::class);
     }
 
     /**
@@ -100,21 +106,46 @@ class ImageGalleryController extends Controller
                 'building' => $building->id,
             ])->with(SessionConst::FLASH_MESSAGE_ERROR, ['画像ギャラリーの登録処理に失敗しました']);
         }
-
     }
 
-
-    public function show($building, $filename)
+    /**
+     * @param Building $building
+     * @param Request $request // TODO
+     */
+    public function update(Building $building, Request $request)
     {
-        $path = "{$building}/image_gallery/{$filename}";
+        try {
+            // 注釈文を更新
+            $this->building_setting_service->upsertBuildingSetting($building, [
+                'image_gallery_annotation' => $request->image_gallery_annotation,
+            ]);
 
-        if (!Storage::disk('private')->exists($path)) {
-            abort(404);
+            // TODO 画像のタイトルと並び順を更新
+
+            return redirect()->route('manager_project_image_gallery', [
+                'building' => $building->id,
+            ])->with(SessionConst::FLASH_MESSAGE_SUCCESS, ['画像ギャラリー設定を更新しました']);
+        } catch (Throwable $e) {
+            Log::error($e->getMessage() . ' CLASS:' . __CLASS__ . ' ' . 'LINE:' . __LINE__);
+            return redirect()->back()->with(SessionConst::FLASH_MESSAGE_ERROR, ['画像ギャラリー設定の更新処理に失敗しました']);
         }
-
-        $file = Storage::disk('private')->get($path);
-        $mime = Storage::disk('private')->mimeType($path);
-
-        return response($file, 200)->header('Content-Type', $mime);
     }
+
+    /**
+     * 画像ギャラリーを削除する
+     * @param Building $building
+     * @param ImageGallery $image_gallery
+     * @return void
+     */
+    public function delete(Building $building, ImageGallery $image_gallery)
+    {
+        if($building->id <> $image_gallery->building_id){
+            // TODO
+            dd('不正なリクエストです');
+        }
+        $image_gallery->updated_by = Auth::guard('managers')->user()->id;
+        $image_gallery->deleted_at = Carbon::now();
+        $image_gallery->save();
+    }
+
 }

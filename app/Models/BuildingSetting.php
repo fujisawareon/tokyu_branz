@@ -49,6 +49,7 @@ class BuildingSetting extends Model
         'sales_suspension_message',
         'building_site_url',
         'building_site_display_flg',
+        'image_gallery_annotation',
         'created_by',
         'updated_by',
     ];

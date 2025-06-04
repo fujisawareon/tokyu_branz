@@ -10,8 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
- * @property string $building_name
- * @property int $sales_status
+ * @property int $building_id
+ * @property string $title
+ * @property string $image_file_name
+ * @property int $sort
+ * @property $updated_by
+ * @property $deleted_at
  *
  */
 class ImageGallery extends Model

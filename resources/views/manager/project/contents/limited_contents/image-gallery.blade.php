@@ -31,12 +31,12 @@
             <div class="page-name">画像ギャラリー</div>
 
             <div style="width: 850px">
-                <form method="POST">
+                <form method="POST" action="{{ route('manager_project_image_gallery_update', ['building' => $building->id]) }}">
                     @csrf
                     <div class="item-row">
                         <div class="item-row-title">注釈文</div>
                         <div class="item-row-content">
-                            <textarea name="message" rows="4"
+                            <textarea name="image_gallery_annotation" rows="4"
                                       class="input-box w-full">{{ old('message', ($building->buildingSetting->image_gallery_annotation)?? null) }}</textarea>
                         </div>
                     </div>
@@ -47,15 +47,12 @@
                                 <div class="flex-center-center mb-2">
                                     <button type="button" class="btn min" id="add_image_btn" onclick="">画像追加</button>
                                 </div>
-
-
-
                                 <div class="list-element mb-2">
                                     <div class="list-element-header">
                                         <div class="list-element-row">
                                             <div style="width: 65px">並び順</div>
-                                            <div style="width: 300px">カテゴリ名</div>
-                                            <div style="flex: 1">表示</div>
+                                            <div style="width: 300px">画像タイトル</div>
+                                            <div style="flex: 1">画像</div>
                                             <div style="width: 65px">削除</div>
                                         </div>
                                     </div>
@@ -73,11 +70,15 @@
                                                     </div>
                                                 </div>
                                                 <div style="flex: 1" class="">
-                                                    <img src="{{ Storage::url($building->id . '/image_gallery/thumbnail/' . $image_gallery->image_file_name) }}"
-                                                         alt="{{ $image_gallery->title }}">
+                                                    <div style="height: 100px; width: 150px;margin: 0 auto;">
+                                                        <img src="{{ Storage::url($building->id . '/image_gallery/thumbnail/' . $image_gallery->image_file_name) }}"
+                                                             alt="{{ $image_gallery->title }}"
+                                                            style="object-fit: cover;height: 100%; width: 100%;"
+                                                        >
+                                                    </div>
                                                 </div>
                                                 <div style="width: 65px" class="flex-center-center">
-                                                    <button type="button" class="btn min color-red delete-btn">削除</button>
+                                                    <button type="button" class="btn min color-red delete-btn" data-id="{{ $image_gallery->id }}">削除</button>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -86,6 +87,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="flex-center-center">
                         <input type="submit" class="btn" value="更新">
                     </div>
@@ -131,4 +133,5 @@
 </x-app-manager-project-layout>
 
 <script>
+    const building_id = {{ $building->id }};
 </script>
