@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Drivers\Imagick\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -63,15 +63,23 @@ class ImageGalleryController extends Controller
             $directory = "{$building->id}/image_gallery";
             Storage::disk('public')->makeDirectory($directory);
 
-            // 元画像保存
+            // 元画像を保存
             $request->file('image')->storeAs($directory, $file_name, 'public');
 
-            // Intervention Image でサムネイル作成
+            // 保存先フルパス（物理パス）
+            $storagePath = Storage::disk('public')->path("{$directory}/{$file_name}");
+
+            // Intervention で読み込む
             $manager = new ImageManager(new Driver());
-            $thumbnail = $manager
-                ->read($request->file('image')->getPathname())
-                ->resize(300, null)
-                ->toJpeg();
+            $thumbnail = $manager->read($storagePath)
+                ->scale(width: 300, height: null); // 高さ省略NGの可能性
+
+            // 拡張子別に変換
+            $thumbnail = match ($extension) {
+                'png' => $thumbnail->toPng(),
+                'webp' => $thumbnail->toWebp(),
+                default => $thumbnail->toJpeg(),
+            };
 
             // サムネイル保存
             Storage::disk('public')->put("{$directory}/thumbnail/{$file_name}", (string) $thumbnail);

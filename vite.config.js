@@ -17,10 +17,12 @@ export default defineConfig({
 
                 // 各ページ単位
                 'resources/css/manager/dashboard.css',
+                'resources/scss/customer/my_page.scss',
                 'resources/scss/manager/project/customer-analysis.scss',
                 'resources/js/manager/building_list.js',
                 'resources/js/manager/contents/action_btn_setting.js',
                 'resources/js/manager/contents/sales_status.js',
+                'resources/js/manager/contents/limited_contents/image_gallery.js',
                 'resources/js/manager/dashboard.js',
                 'resources/js/manager/manager_show.js',
                 'resources/js/manager/project/customer/search.js',
@@ -28,6 +30,7 @@ export default defineConfig({
 
                 'resources/js/customer/sample.jsx',
                 'resources/js/limited_contents/sample.jsx',
+                'resources/js/limited_contents/image_gallery/App.jsx',
             ],
             refresh: true,
         }),

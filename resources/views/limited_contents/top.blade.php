@@ -1,24 +1,26 @@
-<x-limited-contents-layout>
+<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu">
+
     <x-slot name="css">
-        @vite(['resources/scss/customer/my_page.scss'])
     </x-slot>
 
     <x-slot name="js">
         @viteReactRefresh
-        @vite(['resources/js/limited_contents/sample.jsx'])
-    </x-slot>
-
-    <x-slot name="header">
-        {{ $building->building_name }}
+        @vite([
+        ])
     </x-slot>
 
     <div class="container-position">
         <div class="main-contents">
-            <div id="react-root"
-                 data-user-name="react"
-            ></div>
+            <img src="{{ Storage::url('building/'. $building->id  .'/'. $building->top_image) }}" alt="トップ画像">
         </div>
     </div>
 </x-limited-contents-layout>
+<style>
+    .main-contents > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
 
 
