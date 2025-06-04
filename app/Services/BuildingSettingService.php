@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Building;
 use App\Models\BuildingSetting;
+use App\Models\LimitedContents;
 use App\Models\Manager;
 use App\Models\MasterData;
 use App\Repositories\Interfaces\ActionBtnSettingRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Repositories\Interfaces\LimitedContentRepositoryInterface;
 use App\Repositories\Interfaces\MasterDataRepositoryInterface;
 use App\Repositories\Interfaces\SalesScheduleRepositoryInterface;
 use App\Traits\CacheTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class BuildingSettingService
@@ -204,6 +206,20 @@ class BuildingSettingService
         }
 
         $this->action_btn_setting_repository->insert($new_records);
+    }
+
+    /**
+     * 表示可能な限定コンテンツを取得する
+     * @param int $building_id
+     * @return Collection<int, LimitedContents>
+     */
+    public function getEnableLimitedContentList(int $building_id): Collection
+    {
+        // 登録してあるデータを取得
+        $limited_content_collection = $this->limited_content_repository->getByBuildingId($building_id);
+
+        // 表示設定しているコンテンツに絞る
+        return $limited_content_collection->where('display_flg', 1); // TODO マジックナンバー
     }
 
     /**

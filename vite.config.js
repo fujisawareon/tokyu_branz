@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/common/daterangepicker.js',
                 'resources/js/common/datatables.js',
                 'resources/js/common/sortable.js',
+                'resources/js/contents_app.js',
                 'resources/js/customer_app.js',
                 'resources/js/manager_app.js',
                 'resources/js/manager_project.js',
@@ -29,7 +30,6 @@ export default defineConfig({
                 'resources/js/manager/project/customer/list.js',
 
                 'resources/js/customer/sample.jsx',
-                'resources/js/limited_contents/sample.jsx',
                 'resources/js/limited_contents/image_gallery/App.jsx',
             ],
             refresh: true,

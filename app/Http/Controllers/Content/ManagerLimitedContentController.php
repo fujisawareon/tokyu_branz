@@ -19,7 +19,7 @@ class ManagerLimitedContentController extends LimitedContentController
     public function __invoke(Building $building, string $page_name)
     {
         // 閲覧可能なメニューを取得
-        $contents_menu = $this->getContentsMenu();
+        $contents_menu = $this->getContentsMenu($building->id, true);
 
         // 閲覧可能なメニューかチェックする
         if (!$this->checkURL($page_name, $contents_menu)) {

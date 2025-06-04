@@ -25,7 +25,6 @@
     <div class="main-contents">
         <div class="contents-area" style="width: 500px">
 
-            @dump($errors->get('display'))
             @include('layouts.manager.flash_message')
             <div class="page-name">限定コンテンツ設定</div>
 
