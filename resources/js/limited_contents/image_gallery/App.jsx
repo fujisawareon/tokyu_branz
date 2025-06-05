@@ -9,16 +9,16 @@ const rootElement = document.getElementById('react_root');
 
 // Laravelから渡されたデータ
 const contentsData = rootElement ? JSON.parse(rootElement.dataset.contents) : [];
-const imageGallery = contentsData["image_gallery"];
+const imageGalleryList = contentsData["image_gallery"];
 
 const buildingId = rootElement ? JSON.parse(rootElement.dataset.building_id) : [];
 
 const App = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const currentImage = imageGallery[currentIndex];
+    const currentImage = imageGalleryList[currentIndex];
 
     return (
-        <div style={{ position: 'relative', height: '100%' }}>
+        <div style={{ position: 'relative', height: '100%', overflow: 'hidden'}}>
             {contentsData["image_gallery_annotation"] &&
                 <MessageModal message={contentsData["image_gallery_annotation"]} />
             }
@@ -26,13 +26,14 @@ const App = () => {
             <ImageViewer
                 buildingId={buildingId}
                 image={currentImage}
-                onNext={() => setCurrentIndex((currentIndex + 1) % imageGallery.length)}
-                onPrev={() => setCurrentIndex((currentIndex - 1 + imageGallery.length) % imageGallery.length)}
+                onNext={() => setCurrentIndex((currentIndex + 1) % imageGalleryList.length)}
+                onPrev={() => setCurrentIndex((currentIndex - 1 + imageGalleryList.length) % imageGalleryList.length)}
             />
             <ImageTitle title={currentImage.title} />
             <ThumbnailList
                 buildingId={buildingId}
-                images={imageGallery}
+                images={imageGalleryList}
+                activeIndex={currentIndex}
                 onSelect={(index) => setCurrentIndex(index)}
             />
         </div>

@@ -7,7 +7,7 @@
 </div>
 
 <div id="overlay"
-     class="fixed inset-0 bg-black bg-opacity-50 z-40 transform translate-x-full transition-transform duration-300"
+     class="fixed inset-0 bg-black bg-opacity-50 z-50 transform translate-x-full transition-transform duration-300"
      onclick="toggleMenu()">
 </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "./MessageModal.module.scss";
+import styles from './MessageModal.module.scss';
 
 const AnnotationModal = ({ message }) => {
     const [visible, setVisible] = useState(true);

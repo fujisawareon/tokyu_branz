@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./ImageTitle.module.scss";
+import styles from './ImageTitle.module.scss';
 
 const ImageTitle = ({ title }) => {
     return (
