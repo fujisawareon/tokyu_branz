@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Building;
+use App\Models\Customer;
 use App\Models\MasterData;
 use App\Repositories\Interfaces\MasterDataRepositoryInterface;
 use App\Services\BuildingService;
@@ -37,10 +38,10 @@ class LimitedContentController extends Controller
     /**
      * 閲覧可能な限定コンテンツのメニューを取得する
      * @param int $building_id
-     * @param bool $presentation_mode
+     * @param Customer|null $customer ※プレゼンモードの場合はnull
      * @return array
      */
-    protected function getContentsMenu(int $building_id, bool $presentation_mode = false): array
+    protected function getContentsMenu(int $building_id, ?Customer $customer = null): array
     {
         /** @var MasterDataRepositoryInterface $master_data_repository */
         $master_data_repository = app(MasterDataRepositoryInterface::class);

@@ -2,7 +2,14 @@
 
 <header>
     <div class="flex-between-center h-full">
-        <a href="{{ route('contents_manager', ['building' => $building->id, 'page_name' => 'top']) }}">
+
+        @if($app_log_id)
+            @php $route_name = 'contents_customer'; @endphp
+        @else
+            @php $route_name = 'contents_manager'; @endphp
+        @endif
+
+        <a href="{{ route($route_name, ['building' => $building->id, 'page_name' => 'top']) }}">
             <div class="logo">
                 <img src="{{ asset('image/logo.svg') }}" alt="MyBRANZロゴ">
             </div>

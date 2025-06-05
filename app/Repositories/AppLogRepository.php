@@ -20,4 +20,12 @@ class AppLogRepository implements AppLogRepositoryInterface
         return AppLog::whereIn('building_id', $building_ids)->count();
     }
 
+    /**
+     * @inheritDoc
+     * @see AppLogRepositoryInterface::create()
+     */
+    public function create(array $param): AppLog
+    {
+        return AppLog::create($param);
+    }
 }

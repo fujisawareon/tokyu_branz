@@ -19,7 +19,7 @@ class ManagerLimitedContentController extends LimitedContentController
     public function __invoke(Building $building, string $page_name)
     {
         // 閲覧可能なメニューを取得
-        $contents_menu = $this->getContentsMenu($building->id, true);
+        $contents_menu = $this->getContentsMenu($building->id);
 
         // 閲覧可能なメニューかチェックする
         if (!$this->checkURL($page_name, $contents_menu)) {
@@ -33,6 +33,7 @@ class ManagerLimitedContentController extends LimitedContentController
             'building' => $building,
             'contents_menu' => $contents_menu,
             'contents_data' => $contents_data,
+            'app_log_id' => null,
         ]);
     }
 

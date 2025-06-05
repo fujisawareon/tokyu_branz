@@ -10,11 +10,13 @@ class LimitedContentsLayout extends Component
 {
     public Building $building;
     public array $contents_menu;
+    public ?int $app_log_id;
 
-    public function __construct(Building $building, array $contentsMenu)
+    public function __construct(Building $building, array $contentsMenu, ?int $appLogId)
     {
         $this->building = $building;
         $this->contents_menu = $contentsMenu;
+        $this->app_log_id = $appLogId;
     }
 
     /**

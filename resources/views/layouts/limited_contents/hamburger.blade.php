@@ -27,9 +27,16 @@
                 トップ
             </a>
         </li>
+
+        @if($app_log_id)
+            @php $route_name = 'contents_customer'; @endphp
+        @else
+            @php $route_name = 'contents_manager'; @endphp
+        @endif
+
         @foreach($contents_menu as $page_name => $menu)
             <li>
-                <a href="{{ route('contents_manager', ['building' => $building->id, 'page_name' => $page_name]) }}">
+                <a href="{{ route($route_name, ['building' => $building->id, 'page_name' => $page_name]) }}">
                     {{ $menu }}
                 </a>
             </li>

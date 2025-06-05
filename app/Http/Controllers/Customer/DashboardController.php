@@ -39,10 +39,4 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function aaaaa(Building $building, string $page_name)
-    {
-        dd($building, $page_name);
-
-    }
-
 }

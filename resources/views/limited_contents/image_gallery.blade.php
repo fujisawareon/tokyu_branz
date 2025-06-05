@@ -1,5 +1,5 @@
-<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu">
-    <x-slot name="css">
+<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu" :appLogId="$app_log_id">
+<x-slot name="css">
     </x-slot>
 
     <x-slot name="js">
