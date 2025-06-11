@@ -15,7 +15,6 @@
         @vite([
             'resources/css/app.css',
             'resources/js/contents_app.js',
-            'resources/js/app.js',
         ])
 
         @if (isset($js))
@@ -25,7 +24,14 @@
         @if (isset($css))
             {{ $css }}
         @endif
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
+    <script>
+        window.appLogId = @json($app_log_id);
+        window.buildingId = @json($building->id);
+    </script>
+
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
 
@@ -38,4 +44,5 @@
             </main>
         </div>
     </body>
+
 </html>

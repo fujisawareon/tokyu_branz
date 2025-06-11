@@ -9,7 +9,6 @@
 
     <div class="main-contents">
         <div id="react_root"
-             data-building_id='@json($building->id)'
              data-contents='@json($contents_data)'
         ></div>
     </div>
@@ -17,4 +16,4 @@
 
 <style>
 </style>
-
+                

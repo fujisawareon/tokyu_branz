@@ -11,7 +11,7 @@ const rootElement = document.getElementById('react_root');
 const contentsData = rootElement ? JSON.parse(rootElement.dataset.contents) : [];
 const imageGalleryList = contentsData["image_gallery"];
 
-const buildingId = rootElement ? JSON.parse(rootElement.dataset.building_id) : [];
+const buildingId = window.buildingId;
 
 const App = () => {
     const [currentIndex, setCurrentIndex] = useState(0);

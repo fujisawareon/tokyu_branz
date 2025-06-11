@@ -31,7 +31,9 @@
             <div class="content-menus">
                 <a href="">スケジュール</a>
                 <a href="">オンラインセミナ－動画</a>
-                <a href="">紹介動画</a>
+                <a href="">物件紹介動画</a>
+                <a href="">マンション購入の<br>基礎知識編動画</a>
+                <a href="">BRANZの管理と購入後の<br>サポート編動画</a>
                 <a href="">間取り</a>
                 <a href="" class="option">専有部VR</a>
                 <a href="" class="option">平面図眺望<br>シミュレーション</a>
@@ -58,6 +60,7 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 1rem;
         width: 100%;
+        text-align: center;
     }
 
     .content-menus > a {

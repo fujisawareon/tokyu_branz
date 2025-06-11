@@ -13,7 +13,7 @@ class ManagerLimitedContentController extends LimitedContentController
 {
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(true);
     }
 
     public function __invoke(Building $building, string $page_name)
@@ -27,14 +27,11 @@ class ManagerLimitedContentController extends LimitedContentController
         }
 
         // 閲覧画面に必要なデータを取得
-        $contents_data = $this->getPageData($building, $page_name, true);
+        $this->setPageData($building, $page_name);
 
-        return view('limited_contents.' . $page_name, [
-            'building' => $building,
-            'contents_menu' => $contents_menu,
-            'contents_data' => $contents_data,
-            'app_log_id' => null,
-        ]);
+        return view('limited_contents.' . $page_name,
+            $this->passingVariables($building, $contents_menu,  null)
+        );
     }
 
 }

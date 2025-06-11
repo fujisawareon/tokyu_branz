@@ -16,12 +16,15 @@ use App\Services\ImageGalleryService;
 class LimitedContentController extends Controller
 {
     protected BuildingService $building_service;
+    private array $contents_data;
+    private bool $presentation_mode;
 
     /**
      * コンストラクタ
      */
-    public function __construct()
+    public function __construct(bool $presentation_mode = false)
     {
+        $this->presentation_mode = $presentation_mode;
         $this->building_service = app(BuildingService::class);
     }
 
@@ -63,21 +66,21 @@ class LimitedContentController extends Controller
     }
 
     /**
-     * 閲覧する画面に必要なデータを取得する
-     * @param int $building_id
+     * 閲覧する画面に必要なデータを作成する
+     * @param Building $building
      * @param string $page_name
-     * @param bool $presentation_mode
-     * @return array
+     * @return void
      */
-    protected function getPageData(Building $building, string $page_name, bool $presentation_mode = false)
+    protected function setPageData(Building $building, string $page_name): void
     {
-        return match ($page_name) {
+        $this->contents_data = match ($page_name) {
             'image_gallery' => $this->getImageGallery($building),
             default => [],
         };
     }
 
     /**
+     * 画像ギャラリーに必要なデータを取得する
      * @param Building $building
      * @return array
      */
@@ -86,6 +89,27 @@ class LimitedContentController extends Controller
         return [
             'image_gallery_annotation' => $building->buildingSetting->image_gallery_annotation,
             'image_gallery' => (new ImageGalleryService())->getByBuildingId($building->id),
+        ];
+    }
+
+    /**
+     * @param Building $building
+     * @param array $contents_menu
+     * @param int|null $app_log_id
+     * @return array
+     */
+    protected function passingVariables(
+        Building $building,
+        array $contents_menu,
+        ?int $app_log_id
+    )
+    {
+        return [
+            'building' => $building,
+            'contents_menu' => $contents_menu,
+            'contents_data' => $this->contents_data,
+            'app_log_id' => $app_log_id,
+            'presentation_mode' => $this->presentation_mode,
         ];
     }
 }

@@ -39,7 +39,7 @@ class CustomerLimitedContentController extends LimitedContentController
         }
 
         // 閲覧画面に必要なデータを取得
-        $contents_data = $this->getPageData($building, $page_name);
+        $this->setPageData($building, $page_name);
 
         // 閲覧ログを登録
         $app_log =$this->app_log_service->create([
@@ -48,12 +48,9 @@ class CustomerLimitedContentController extends LimitedContentController
             'page_key' => $page_name,
         ]);
 
-        return view('limited_contents.' . $page_name, [
-            'building' => $building,
-            'contents_menu' => $contents_menu,
-            'contents_data' => $contents_data,
-            'app_log_id' => $app_log->id,
-        ]);
+        return view('limited_contents.' . $page_name,
+            $this->passingVariables($building, $contents_menu,  $app_log->id)
+        );
     }
 
 }
