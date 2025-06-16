@@ -45,6 +45,12 @@ return [
         'interface' => \App\Repositories\Interfaces\MasterDataRepositoryInterface::class,
         'class' => \App\Repositories\MasterDataRepository::class,
     ], [
+        'interface' => \App\Repositories\Interfaces\MovieCategoryRepositoryInterface::class,
+        'class' => \App\Repositories\MovieCategoryRepository::class,
+    ], [
+        'interface' => \App\Repositories\Interfaces\MovieRepositoryInterface::class,
+        'class' => \App\Repositories\MovieRepository::class,
+    ], [
         'interface' => \App\Repositories\Interfaces\SalesScheduleRepositoryInterface::class,
         'class' => \App\Repositories\SalesScheduleRepository::class,
     ], [
