@@ -43,7 +43,7 @@
                 <a href="" class="option">家具レイアウト<br>シミュレーション</a>
                 <a href="">周辺マップ</a>
                 <a href="">現地写真</a>
-                <a href="">物件資料集</a>
+                <a href="{{ route('manager_project_binder', ['building' => $building->id]) }}">物件資料集</a>
                 <a href="">担当者専用資料集</a>
                 <a href="">ローンシミュレーション</a>
                 <a href="">販売価格表</a>

@@ -48,6 +48,17 @@ class CommonConsts
         ],
     ];
 
+    public const BINDER_FILE_TYPE = [
+        0 => [
+            'value' => 0,
+            'label' => 'ファイル',
+        ],
+        1 => [
+            'value' => 1,
+            'label' => 'URL',
+        ],
+    ];
+
     public const OPTION_CONTENTS = [
         'private_area_vr',
         'plan_view_simulation',

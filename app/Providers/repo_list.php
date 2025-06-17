@@ -12,6 +12,12 @@ return [
         'interface' => \App\Repositories\Interfaces\AppLogRepositoryInterface::class,
         'class' => \App\Repositories\AppLogRepository::class,
     ], [
+        'interface' => \App\Repositories\Interfaces\BinderRepositoryInterface::class,
+        'class' => \App\Repositories\BinderRepository::class,
+    ], [
+        'interface' => \App\Repositories\Interfaces\BinderBuildingCategoryRepositoryInterface::class,
+        'class' => \App\Repositories\BinderBuildingCategoryRepository::class,
+    ], [
         'interface' => \App\Repositories\Interfaces\BuildingRepositoryInterface::class,
         'class' => \App\Repositories\BuildingRepository::class,
     ], [

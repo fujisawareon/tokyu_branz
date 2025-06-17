@@ -117,7 +117,7 @@
             @enderror
         </div>
 
-        {{-- 行追加する時のテンプレート --}}
+        {{-- 行を追加する時の複製用テンプレート --}}
         <template id="action-btn-template">
             <div class="list-element-row" style="align-items: stretch;">
                 <div style="width: 65px; cursor: grab;" class="drag-handle flex-center-center">☰</div>

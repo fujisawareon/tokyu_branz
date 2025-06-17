@@ -16,8 +16,9 @@ use App\Http\Controllers\Manager\BuildingController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\ProjectCustomerController;
 use App\Http\Controllers\Manager\ProjectContentsController;
-use App\Http\Controllers\Manager\LimitedContents\ImageGalleryController;
+use App\Http\Controllers\Manager\LimitedContents\BinderController;
 use App\Http\Controllers\Manager\LimitedContents\BuildingMovieController;
+use App\Http\Controllers\Manager\LimitedContents\ImageGalleryController;
 use App\Http\Controllers\Manager\ProjectHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -114,6 +115,14 @@ Route::prefix('manager')->group(function () {
                 Route::post('update', [ImageGalleryController::class, 'update'])->name('manager_project_image_gallery_update');
                 Route::delete('{image_gallery}/delete', [ImageGalleryController::class, 'delete'])->name('manager_project_image_gallery_delete');
             });
+
+            Route::prefix('binder')->group(function () {
+                Route::get('', [BinderController::class, 'index'])->name('manager_project_binder');
+                Route::post('category_update', [BinderController::class, 'categoryUpdate'])->name('manager_project_binder_category_update');
+                Route::delete('/category_delete/{binder_building_category}', [BinderController::class, 'destroy'])->name('manager_project_binder_category_delete');
+                Route::post('add', [BinderController::class, 'addBinder'])->name('manager_project_binder_add');
+            });
+
         });
 
     });
