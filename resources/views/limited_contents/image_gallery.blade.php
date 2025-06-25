@@ -1,4 +1,4 @@
-<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu" :appLogId="$app_log_id">
+<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu" :presentationMode="$presentation_mode" :appLogId="$app_log_id">
     <x-slot name="css">
     </x-slot>
 

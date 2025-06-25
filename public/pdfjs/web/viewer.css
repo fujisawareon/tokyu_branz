@@ -5276,6 +5276,10 @@ body.wait::before{
           mask-image:var(--toolbarButton-editorSignature-icon);
 }
 
+#printButton,
+#downloadButton {
+    display: none;
+}
 #printButton::before{
   -webkit-mask-image:var(--toolbarButton-print-icon);
           mask-image:var(--toolbarButton-print-icon);

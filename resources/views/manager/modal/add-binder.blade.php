@@ -29,14 +29,19 @@
             <div class="item-row" id="pdf_file">
                 <div class="item-row-title">ファイル</div>
                 <div class="item-row-content">
-                    <input type="file" name="pdf_file">
+                    <input type="file" name="pdf_file" accept="application/pdf">
                     <x-input-error :messages="$errors->get('pdf_file')" class="mt-1"/>
                     <div class="support-msg">※登録可能な拡張子は.pdf のみとなります</div>
                 </div>
             </div>
             <div class="item-row" id="thumbnail">
                 <div class="item-row-title">サムネイル</div>
-                <div class="item-row-content">PDFファイルを選択させる</div>
+                <div class="item-row-content">
+                    <input type="file" name="thumbnail_file" accept="image/jpeg,image/png,image/webp">
+                    <x-input-error :messages="$errors->get('thumbnail_file')" class="mt-1"/>
+                    <div class="support-msg">※登録可能な拡張子は.jpg, .jpeg, .png, .webpとなります</div>
+
+                </div>
             </div>
             <div class="item-row" id="url">
                 <div class="item-row-title">URL</div>

@@ -16,8 +16,11 @@ use App\Services\ImageGalleryService;
 class LimitedContentController extends Controller
 {
     protected BuildingService $building_service;
+    private Building $building;
+    private string $page_name;
     private array $contents_data;
     private bool $presentation_mode;
+    private array $contents_menu;
 
     /**
      * コンストラクタ
@@ -29,22 +32,30 @@ class LimitedContentController extends Controller
     }
 
     /**
+     * @param Building $building
+     * @return void
+     */
+    protected function setParam(Building $building, string $page_name): void
+    {
+        $this->building = $building;
+        $this->page_name = $page_name;
+    }
+
+    /**
      * 閲覧可能なメニューかチェックする
      * @param string $page_name
      * @return true
      */
-    protected function checkURL(string $page_name):bool
+    protected function checkURL():bool
     {
         return true;
     }
 
     /**
      * 閲覧可能な限定コンテンツのメニューを取得する
-     * @param int $building_id
      * @param Customer|null $customer ※プレゼンモードの場合はnull
-     * @return array
      */
-    protected function getContentsMenu(int $building_id, ?Customer $customer = null): array
+    protected function setContentsMenu(?Customer $customer = null)
     {
         /** @var MasterDataRepositoryInterface $master_data_repository */
         $master_data_repository = app(MasterDataRepositoryInterface::class);
@@ -56,10 +67,10 @@ class LimitedContentController extends Controller
         $master_data_collection = $master_data_repository->getMasterDataByDataType(MasterData::LIMITED_CONTENT)->pluck('name', 'data_key');
 
         // 限定コンテンツ設定を取得
-        $limited_content_manu = $building_setting_service->getEnableLimitedContentList($building_id)->pluck('data_key');
+        $limited_content_manu = $building_setting_service->getEnableLimitedContentList($this->building->id)->pluck('data_key');
 
         // 合わせてフィルター＆順序付け
-        return $limited_content_manu->mapWithKeys(function ($key) use ($master_data_collection) {
+        $this->contents_menu = $limited_content_manu->mapWithKeys(function ($key) use ($master_data_collection) {
                 return [$key => $master_data_collection->get($key)];
             })
             ->all();
@@ -75,6 +86,7 @@ class LimitedContentController extends Controller
     {
         $this->contents_data = match ($page_name) {
             'image_gallery' => $this->getImageGallery($building),
+            'building_documents' => $this->getBinderData($building),
             default => [],
         };
     }
@@ -93,20 +105,27 @@ class LimitedContentController extends Controller
     }
 
     /**
+     * 物件資料集に必要なデータを取得する
      * @param Building $building
-     * @param array $contents_menu
+     * @return array
+     */
+    private function getBinderData(Building $building): array
+    {
+        $building->load('binderBuildingCategory.binderBuilding');
+        return [
+            'category' => $building->binderBuildingCategory,
+        ];
+    }
+
+    /**
      * @param int|null $app_log_id
      * @return array
      */
-    protected function passingVariables(
-        Building $building,
-        array $contents_menu,
-        ?int $app_log_id
-    )
+    protected function passingVariables(?int $app_log_id): array
     {
         return [
-            'building' => $building,
-            'contents_menu' => $contents_menu,
+            'building' => $this->building,
+            'contents_menu' => $this->contents_menu,
             'contents_data' => $this->contents_data,
             'app_log_id' => $app_log_id,
             'presentation_mode' => $this->presentation_mode,

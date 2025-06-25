@@ -49,7 +49,13 @@
                                         <button type="button" class="btn min " data-movie_id="{{ $binder->id }}">編集</button>
                                         <button type="button" class="btn min color-red" data-movie_id="{{ $binder->id }}">削除</button>
                                     </div>
-                                    <div style="width: 100%;height: 150px;background: #dcdcdf;"></div>
+                                    <div style="width: 100%;height: 150px;background: #f4f4f4;">
+                                        @if($binder->binder_type  == 0)
+                                            <img src="{{ asset('storage/' . $binder->thumbnail_file_path) }}" alt="サムネイル画像" style="width: 100%; height: 100%; object-fit: cover;">
+                                        @else
+                                            <img src="{{ asset('/svg/browser_window_ui.svg')}}" alt="サムネイル画像" style="width: 100%; height: 100%; object-fit: cover;">
+                                        @endif
+                                    </div>
                                     <div class="mt-1">{{ $binder->binder_name }}</div>
                                 </div>
                             @endforeach

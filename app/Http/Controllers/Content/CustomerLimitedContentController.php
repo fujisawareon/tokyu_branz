@@ -30,11 +30,13 @@ class CustomerLimitedContentController extends LimitedContentController
 
     public function __invoke(Building $building, string $page_name)
     {
+
+        $this->setParam($building, $page_name);
         // 閲覧可能なメニューを取得
-        $contents_menu = $this->getContentsMenu($building->id, $this->customer);
+        $this->setContentsMenu();
 
         // 閲覧可能なメニューかチェックする
-        if (!$this->checkURL($page_name, $contents_menu)) {
+        if (!$this->checkURL()) {
 
         }
 
@@ -42,14 +44,18 @@ class CustomerLimitedContentController extends LimitedContentController
         $this->setPageData($building, $page_name);
 
         // 閲覧ログを登録
-        $app_log =$this->app_log_service->create([
-            'building_id' => $building->id,
-            'customer_id' => $this->customer->id,
-            'page_key' => $page_name,
-        ]);
+        $app_log_id = NULL;
+        if (!in_array($page_name, ['building_documents', 'plan'])) {
+            $app_log =$this->app_log_service->create([
+                'building_id' => $building->id,
+                'customer_id' => $this->customer->id,
+                'page_key' => $page_name,
+            ]);
+            $app_log_id = $app_log->id;
+        }
 
         return view('limited_contents.' . $page_name,
-            $this->passingVariables($building, $contents_menu,  $app_log->id)
+            $this->passingVariables($app_log_id)
         );
     }
 

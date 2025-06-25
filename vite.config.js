@@ -33,6 +33,7 @@ export default defineConfig({
 
                 'resources/js/customer/sample.jsx',
                 'resources/js/limited_contents/image_gallery/App.jsx',
+                'resources/js/limited_contents/binder/App.jsx',
             ],
             refresh: true,
         }),

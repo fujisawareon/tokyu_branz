@@ -37,7 +37,11 @@ class BinderBuilding extends Model
     protected $fillable = [
         'building_id',
         'binder_building_category_id',
+        'binder_type',
         'file_path',
+        'url',
+        'thumbnail_file_path',
         'binder_name',
+        'sort',
     ];
 }

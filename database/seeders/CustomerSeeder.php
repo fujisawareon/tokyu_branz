@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\CustomerBuilding;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -27,6 +29,17 @@ CustomerSeeder extends Seeder
             'email' => 'test@test.jp',
             'password' => static::$password ??= Hash::make('test'),
         ]);
-        Customer::factory(2000)->create();
+
+        $bulk_insert_data = [];
+        for ($customer_id = 1; $customer_id <= 1000; $customer_id++) {
+            $factory = Customer::factory()->make()->toArray();
+
+            $factory['email_verified_at'] = now()->format('Y-m-d H:i:s');
+            $factory['password'] = static::$password ??= Hash::make('test');
+            $bulk_insert_data[] = $factory;
+        }
+
+        // 一括挿入
+        Customer::insert($bulk_insert_data);
     }
 }

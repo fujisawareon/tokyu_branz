@@ -27,7 +27,6 @@ return new class extends Migration
             $table->tinyInteger('status')->default(0)->comment('状態');
             $table->rememberToken();
             $table->tinyInteger('first_registration_flag')->default(0)->comment('初回登録済フラグ');
-            $table->timestamp('last_login_at')->nullable()->comment('最終ログイン日時');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('作成日時');
             $table->integer('created_by')->nullable()->comment('作成者');

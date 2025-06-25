@@ -89,19 +89,25 @@ class BinderController extends Controller
     {
         try {
             $file_path = null;
-            if (isset($request['pdf_file']) && $request['pdf_file']->isValid()) {
+            $thumbnail_path = null;
+            if ($request->hasFile('pdf_file') && $request->file('pdf_file')->isValid()) {
                 // 任意のディレクトリに保存（例: storage/app/public/binders/{buildingId}/）
                 $file_path = $request['pdf_file']->store("{$building->id}/binder");
             }
 
-            $this->binder_service->addBinder($building->id, $request->all(), $file_path);
+            if ($request->hasFile('thumbnail_file') && $request->file('thumbnail_file')->isValid()) {
+                $thumbnail_path = $request->file('thumbnail_file')->store("{$building->id}/thumbnails");
+            }
+
+            $this->binder_service->addBinder($building->id, $request->all(), $file_path, $thumbnail_path);
 
             return redirect()->back()->with(SessionConst::FLASH_MESSAGE_SUCCESS, ['資料を登録しました']);
         } catch (\Throwable $e) {
             Log::error($e->getMessage() . ' CLASS:' . __CLASS__ . ' ' . 'LINE:' . __LINE__);
             return redirect()->back()->with(SessionConst::FLASH_MESSAGE_ERROR, ['資料の登録に失敗しました']);
         }
-
     }
+
+
 
 }

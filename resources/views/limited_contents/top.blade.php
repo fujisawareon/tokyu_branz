@@ -1,6 +1,6 @@
-<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu" :app_log_id="$app_log_id">
+<x-limited-contents-layout :building="$building" :contentsMenu="$contents_menu" :presentationMode="$presentation_mode" :appLogId="$app_log_id">
 
-    <x-slot name="css">
+<x-slot name="css">
     </x-slot>
 
     <x-slot name="js">

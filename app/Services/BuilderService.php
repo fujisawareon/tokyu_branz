@@ -71,15 +71,16 @@ class BuilderService
      * @param string|null $file_path
      * @return BinderBuilding
      */
-    public function addBinder(int $building_id, array $param, ?string $file_path): BinderBuilding
+    public function addBinder(int $building_id, array $param, ?string $file_path, ?string $thumbnail_path): BinderBuilding
     {
         return $this->binder_repository->create([
             'building_id' => $building_id,
             'binder_building_category_id' => $param['category_id'],
-            'file_type' => $param['file_type'],
+            'binder_type' => $param['file_type'],
             'url' => $param['url'],
             'binder_name' => $param['binder_name'],
             'file_path' => $file_path,
+            'thumbnail_file_path' => $thumbnail_path,
         ]);
     }
 }

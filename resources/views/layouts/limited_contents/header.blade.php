@@ -3,10 +3,10 @@
 <header>
     <div class="flex-between-center h-full">
 
-        @if($app_log_id)
-            @php $route_name = 'contents_customer'; @endphp
-        @else
+        @if($presentation_mode)
             @php $route_name = 'contents_manager'; @endphp
+        @else
+            @php $route_name = 'contents_customer'; @endphp
         @endif
 
         <a href="{{ route($route_name, ['building' => $building->id, 'page_name' => 'top']) }}">

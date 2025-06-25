@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             DisplayCustomerListColumnSeeder::class,
             ManagerSeeder::class,
             CustomerSeeder::class,
+            CustomerBuildingSeeder::class,
             AppLogSeeder::class,
         ]);
     }

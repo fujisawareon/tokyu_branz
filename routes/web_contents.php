@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Customer\DashboardController;
 use App\Http\Controllers\Content\CustomerLimitedContentController;
 use App\Http\Controllers\Content\LogController;
 use App\Http\Controllers\Content\ManagerLimitedContentController;

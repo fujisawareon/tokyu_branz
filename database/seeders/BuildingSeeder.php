@@ -23,9 +23,9 @@ class BuildingSeeder extends Seeder
                 'building_8_digit_code' => 'XXXXXXXX',
                 'building_4_digit_code' => 'XXXX',
                 'created_by' => 1,
-                'sales_status' => 1,
-                'top_image' => '',
-                'thumbnail_image' => '',
+                'sales_status' => 2,
+                'top_image' => 'top_image_1750756711_スクリーンショット 2024-12-10 101421.png',
+                'thumbnail_image' => 'thumbnail_image_1750756711_195101_p1.jpg',
             ], [
                 'building_name' => '渋谷',
                 'building_8_digit_code' => 'XXXXXXXX',
