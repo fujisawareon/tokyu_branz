@@ -45,7 +45,7 @@
                             {{-- 既存資料ブロック --}}
                             @foreach($category->binderBuilding as $binder)
                                 <div class="binder-item">
-                                    <div class="flex-between-center mb-1">
+                                    <div class="flex-between-center mb-1 navi">
                                         <button type="button" class="btn min " data-movie_id="{{ $binder->id }}">編集</button>
                                         <button type="button" class="btn min color-red" data-movie_id="{{ $binder->id }}">削除</button>
                                     </div>

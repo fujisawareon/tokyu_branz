@@ -22,6 +22,11 @@
     flex-flow: column;
     justify-content: space-between;
 
+    & > .navi {
+      padding: .25rem 0;
+      background: #e8e8e8;
+    }
+
     &.register-new {
       background: #f0f6ff;
       color: var(--manager-main-color);

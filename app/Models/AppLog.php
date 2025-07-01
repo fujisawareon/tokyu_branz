@@ -29,6 +29,11 @@ class AppLog extends Model
      * @var string[]
      */
     protected $fillable = [
+        'building_id',
+        'customer_id',
+        'page_key',
+        'floor_plan_id',
+        'binder_building_id',
     ];
 
     /**

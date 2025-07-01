@@ -1,14 +1,28 @@
-import React, { useState, useEffect }  from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, {useState, useEffect} from 'react';
+import {motion, AnimatePresence} from 'framer-motion';
 import {createRoot} from "react-dom/client";
 import PDFViewer from './components/PDFViewer';
 import PDFBinder from './components/PDFBinder';
 import URLBinder from './components/URLBinder';
+import {sendCreateLog} from './utils/logging';
+import {Log} from '../Log.js'; // パスはプロジェクト構成に応じて
 
 function MainContents({contentsData}) {
     const [selectedBinder, setSelectedBinder] = useState(null);
     const [openCategories, setOpenCategories] = useState({});
     const allOpen = Object.values(openCategories).every(Boolean);
+    const [appLogId, setAppLogId] = useState(null);
+
+    const buildingId = window.buildingId;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    useEffect(() => {
+        sendCreateLog(csrfToken, buildingId, "building_documents").then((data) => {
+            if (data) {
+                setAppLogId(data.app_log_id); // 必要であれば
+            }
+        });
+    }, []);
 
     // 初期マウント時に全て true に設定
     useEffect(() => {
@@ -35,7 +49,18 @@ function MainContents({contentsData}) {
     };
 
     if (selectedBinder) {
-        return <PDFViewer binder={selectedBinder} onBack={() => setSelectedBinder(null)}/>;
+        return <PDFViewer
+            binder={selectedBinder}
+            onBack={() => {
+                Log.updateStayTime(csrfToken, buildingId, appLogId);
+                setSelectedBinder(null);
+                sendCreateLog(csrfToken, buildingId, "building_documents").then((data) => {
+                    if (data) {
+                        setAppLogId(data.app_log_id); // 必要であれば
+                    }
+                });
+            }}
+        />;
     }
 
     return (
@@ -53,7 +78,6 @@ function MainContents({contentsData}) {
 
                 {contentsData.category.map((category) => (
                     <div key={category.id}>
-
                         <div
                             className="mt-2 cursor-pointer bg-gray-300 p-2 font-bold flex justify-between items-center"
                             onClick={() => toggleCategory(category.id)}
@@ -64,30 +88,35 @@ function MainContents({contentsData}) {
                         </div>
 
                         {/* 開いている場合のみ表示 */}
-
                         <AnimatePresence initial={false}>
                             {openCategories[category.id] && (
                                 <motion.div
                                     key={category.id}
                                     className="mb-4 p-2 flex flex-row flex-wrap gap-2"
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    style={{ overflow: "hidden" }}
+                                    initial={{height: 0, opacity: 0}}
+                                    animate={{height: "auto", opacity: 1}}
+                                    exit={{height: 0, opacity: 0}}
+                                    transition={{duration: 0.3}}
+                                    style={{overflow: "hidden"}}
                                 >
                                     {category.binder_building.map((binder) => (
                                         <div
                                             key={binder.id}
-                                            style={{ border: "solid 1px #aaa" }}
+                                            style={{border: "solid 1px #aaa"}}
                                         >
                                             {binder.binder_type === 0 ? (
                                                 <PDFBinder
                                                     binder={binder}
-                                                    onSelect={() => setSelectedBinder(binder)}
+                                                    onSelect={() => {
+                                                        setSelectedBinder(binder);
+                                                        Log.updateStayTime(csrfToken, buildingId, appLogId);
+                                                        sendCreateLog(csrfToken, buildingId, "building_documents", binder.id).then((data) => {
+                                                            if (data) setAppLogId(data.app_log_id); // 必要であれば
+                                                        });
+                                                    }}
                                                 />
                                             ) : (
-                                                <URLBinder binder={binder} />
+                                                <URLBinder binder={binder}/>
                                             )}
                                         </div>
                                     ))}

@@ -18,6 +18,7 @@ Route::prefix('contents')->group(function () {
         Route::prefix('customer')->group(function () {
             Route::get('{building}/{page_name}', CustomerLimitedContentController::class)->name('contents_customer');
             Route::post('log_update_stay_time/{building}/{app_log}',  [LogController::class, 'updateStayTime'])->name('contents_customer_log_update_stay_time');
+            Route::post('log_create/{building}',  [LogController::class, 'createLog'])->name('contents_customer_log_update_stay_time');
         });
     });
 });

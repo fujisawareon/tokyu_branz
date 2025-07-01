@@ -8,6 +8,8 @@ use App\Models\AppLog;
 use App\Models\Building;
 use App\Models\Customer;
 use App\Services\AppLogService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +29,26 @@ class LogController extends LimitedContentController
         parent::__construct();
         $this->customer = Auth::guard('customers')->user();
         $this->app_log_service = app(AppLogService::class);
+    }
+
+    /**
+     * @param Building $building
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function createLog(Building $building, Request $request): JsonResponse
+    {
+        $app_log = $this->app_log_service->create([
+            'building_id' => $building->id,
+            'customer_id' => $this->customer->id,
+            'page_key' => $request->input('page_key'),
+            'binder_building_id' => $request->input('binder_id'),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'app_log_id' => $app_log->id,
+        ]);
     }
 
     public function updateStayTime(Building $building, AppLog $app_log)
