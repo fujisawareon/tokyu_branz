@@ -1,28 +1,117 @@
 
 .building-box {
-  padding: .25rem;
+  padding: 1rem;
   margin: 1rem 0 2rem;
   border: solid 1px #eeee;
-  box-shadow: #dddd 5px 5px 10px;
+  box-shadow: #001c5138 10px 10px 30px;
   display: flex;
+  gap: .5rem;
   justify-content: space-between;
-}
 
-.content-btn {
-  padding: .5rem 1rem;
-  background: var(--manager-main-color);
-  border: solid 1px var(--manager-main-color);
-  border-radius: .25rem;
-  color: white;
-  display: block;
-  font-weight: bold;
-  font-size: 1.2rem;
-  transition: .2s;
+  & > .basic-data {
+    width: 250px;
 
-  &:hover {
-    background: white;
-    padding: .5rem 1rem;
-    color: var(--manager-main-color);
+    & > .building-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
 
+    & > .building-thumbnail-image {
+      height: 200px;
+      width: 250px;
+
+      & > img {
+        height: 200px;
+        width: 250px;
+        object-fit: cover;
+
+      }
+    }
+  }
+
+  & > .details-area {
+    flex: 1;
+  }
+
+  & > .btn-area {
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .details-title {
+    font-size: 1.1rem;
+    font-weight: bold;
   }
 }
+
+.details-area {
+  & > .notice {
+    padding: .5rem;
+    background: #e6e6e6;
+    border-radius: .25rem;
+  }
+
+  & > .sales-schedule-area {
+    .sales-schedule {
+      position: relative;
+      padding: 0 .75rem 2rem;
+
+      & > .mark {
+        width: 50px;
+      }
+
+      & > .schedule-name {
+        position: absolute;
+        width: 100px;
+        top: 58px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+        &.online_seminar,
+        &.online_meeting {
+          letter-spacing: -0.09em;
+        }
+      }
+    }
+  }
+}
+
+.action-btn-area {
+  display: flex;
+  flex-direction: column;
+
+
+  & > a {
+    display: block;
+  }
+}
+
+.action-btn {
+  padding: .4rem 1rem;
+  border: solid 1px var(--manager-main-color);
+  border-radius: .25rem;
+  display: inline-block;
+  font-weight: bold;
+  transition: .2s;
+
+  &.content-btn {
+    padding: .4rem 1.25rem;
+    font-size: 1.2rem;
+    background: var(--manager-main-color);
+    color: white;
+  }
+
+  &.building-site-btn {
+    padding: .25rem .5rem;
+    font-size: .9rem;
+  }
+
+  &:hover {
+    background: #cddaf4;
+    color: var(--manager-main-color);
+  }
+}
+

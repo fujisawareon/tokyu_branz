@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Customer\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Customer\DashboardController;
+use App\Http\Controllers\Customer\MyPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('customer')->group(function () {
@@ -15,6 +15,6 @@ Route::prefix('customer')->group(function () {
     Route::middleware('auth:customers')->group(function () {
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('manager_logout');
 
-        Route::get('top', DashboardController::class)->name('customer_top');
+        Route::get('top', MyPageController::class)->name('customer_top');
     });
 });

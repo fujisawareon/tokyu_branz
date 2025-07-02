@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Collection<int, Manager> $personCharge
  * @property Collection<int, ActionBtnSetting> $actionBtnSetting
  * @property Collection<int, BinderBuildingCategory> $binderBuildingCategory
+ * @property Collection<int, SalesSchedule> $salesSchedule
  *
  */
 class Building extends Model
@@ -103,6 +104,14 @@ class Building extends Model
     public function binderBuildingCategory(): HasMany
     {
         return $this->hasMany(BinderBuildingCategory::class)->orderBy('sort');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function salesSchedule(): HasMany
+    {
+        return $this->hasMany(SalesSchedule::class)->orderBy('sort');
     }
 
 }
