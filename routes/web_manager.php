@@ -10,16 +10,16 @@ use App\Http\Controllers\Manager\Auth\NewPasswordController;
 use App\Http\Controllers\Manager\Auth\PasswordController;
 use App\Http\Controllers\Manager\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Manager\Auth\VerifyEmailController;
-use App\Http\Controllers\Manager\DashboardController;
-use App\Http\Controllers\Manager\TestController;
 use App\Http\Controllers\Manager\BuildingController;
+use App\Http\Controllers\Manager\DashboardController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\ProjectCustomerController;
 use App\Http\Controllers\Manager\ProjectContentsController;
+use App\Http\Controllers\Manager\ProjectHomeController;
+use App\Http\Controllers\Manager\TestController;
 use App\Http\Controllers\Manager\LimitedContents\BinderController;
 use App\Http\Controllers\Manager\LimitedContents\BuildingMovieController;
 use App\Http\Controllers\Manager\LimitedContents\ImageGalleryController;
-use App\Http\Controllers\Manager\ProjectHomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('manager')->group(function () {
@@ -122,8 +122,6 @@ Route::prefix('manager')->group(function () {
                 Route::delete('/category_delete/{binder_building_category}', [BinderController::class, 'destroy'])->name('manager_project_binder_category_delete');
                 Route::post('add', [BinderController::class, 'addBinder'])->name('manager_project_binder_add');
             });
-
         });
-
     });
 });

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\Drivers\Gd\Driver; // ← GDドライバを明示的に指定
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -91,7 +91,7 @@ class ImageGalleryController extends Controller
             Storage::disk('public')->put("{$directory}/thumbnail/{$file_name}", (string) $thumbnail);
 
             // 保存データ
-            $this->image_gallery_service->create( [
+            $this->image_gallery_service->create([
                 'building_id' => $building->id,
                 'title' => $request->title,
                 'image_file_name' => $file_name,
@@ -139,7 +139,7 @@ class ImageGalleryController extends Controller
      */
     public function delete(Building $building, ImageGallery $image_gallery)
     {
-        if($building->id <> $image_gallery->building_id){
+        if ($building->id <> $image_gallery->building_id) {
             // TODO
             dd('不正なリクエストです');
         }
@@ -147,5 +147,4 @@ class ImageGalleryController extends Controller
         $image_gallery->deleted_at = Carbon::now();
         $image_gallery->save();
     }
-
 }

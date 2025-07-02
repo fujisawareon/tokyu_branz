@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $building_id
  * @property string $category_name
  * @property int $sort
- * @property Collection<int, BinderBuilding> $binderBuilding
+ * @property-read Collection<int, BinderBuilding> $binderBuilding
  */
 class BinderBuildingCategory extends Model
 {

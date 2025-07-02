@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+/**
+ */
 class MyPageController extends Controller
 {
     use FormTrait;
@@ -39,9 +41,8 @@ class MyPageController extends Controller
         /** @var Customer $customer */
         $customer = Auth::guard('customers')->user();
         $buildings = $customer->buildings;
-        $buildings->load('buildingSetting');
+        $buildings->load('buildingSetting', 'salesSchedule');
 
-        $buildings->load('salesSchedule');
         foreach ($buildings as $building) {
             $building->filteredSalesSchedule = $building->salesSchedule
                 ->filter(fn($s) => $s->display_flg === 1);
@@ -52,5 +53,4 @@ class MyPageController extends Controller
             'sales_schedule_list' => $this->master_data_service->getMasterSalesScheduleData()->pluck('name', 'data_key')->toArray(),
         ]);
     }
-
 }

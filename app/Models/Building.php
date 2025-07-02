@@ -19,10 +19,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $sales_status
  *
  * @property BuildingSetting $buildingSetting
- * @property Collection<int, Manager> $personCharge
- * @property Collection<int, ActionBtnSetting> $actionBtnSetting
- * @property Collection<int, BinderBuildingCategory> $binderBuildingCategory
- * @property Collection<int, SalesSchedule> $salesSchedule
+ * @property-read Collection<int, Manager> $personCharge
+ * @property-read Collection<int, ActionBtnSetting> $actionBtnSetting
+ * @property-read Collection<int, BinderBuildingCategory> $binderBuildingCategory
+ * @property-read Collection<int, SalesSchedule> $salesSchedule
  *
  */
 class Building extends Model
@@ -86,7 +86,7 @@ class Building extends Model
      */
     public function personCharge(): BelongsToMany
     {
-        return $this->BelongsToMany(Manager::class,'building_invitation');
+        return $this->BelongsToMany(Manager::class, 'building_invitation');
     }
 
     /**
@@ -113,5 +113,4 @@ class Building extends Model
     {
         return $this->hasMany(SalesSchedule::class)->orderBy('sort');
     }
-
 }

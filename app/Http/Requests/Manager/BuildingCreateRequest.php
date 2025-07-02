@@ -33,8 +33,8 @@ class BuildingCreateRequest extends FormRequest
             'contents_design_flg' => ['required', Rule::in(array_keys(\App\Consts\CommonConsts::CUSTOM_TYPE)),],
             'top_image' => ['required_if:contents_design_flg,0', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120',],
             'thumbnail_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048',],
-            'location' => ['nullable', 'string', 'max:100', 'regex:/^[ぁ-んァ-ヶー一-龠ａ-ｚＡ-Ｚa-zA-Z0-9０-９々〆〤\s\-ー・。、]+$/u',],
-            'nearest_station' => ['nullable', 'string', 'max:1000', 'regex:/^[ぁ-んァ-ヶー一-龠ａ-ｚＡ-Ｚa-zA-Z0-9０-９々〆〤\s\-ー・。、]+$/u',],
+            'location' => ['nullable', 'string', 'max:100',  'regex:/^[\p{L}\p{N}\p{Z}\p{Pd}「」・（）()―－〜～、。，．\/\\\s]+$/u',],
+            'nearest_station' => ['nullable', 'string', 'max:1000', 'regex:/^[\p{L}\p{N}\p{Z}\p{Pd}「」・（）()―－〜～ー、。，．\/\\\s\r\n]+$/u',],
         ];
     }
 

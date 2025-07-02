@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Ramsey\Collection\Collection;
+use \Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
  * @property int $role_type
- * @property Collection<int, Building> $buildings
+ * @property-read Collection<int, Building> $buildings
  */
 class Customer extends Authenticatable
 {
@@ -87,5 +87,4 @@ class Customer extends Authenticatable
                     });
             });
     }
-
 }

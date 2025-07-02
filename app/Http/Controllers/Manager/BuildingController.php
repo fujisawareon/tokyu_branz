@@ -23,6 +23,10 @@ use Illuminate\Support\Facades\Storage;
 use Throwable;
 use Yajra\DataTables\Facades\DataTables;
 
+/**
+ * 物件に対するコントローラークラス
+ *
+ */
 class BuildingController extends Controller
 {
     use FormTrait;
@@ -103,7 +107,7 @@ class BuildingController extends Controller
         ]);
 
         // ファイルを storage のtmpディレクトリに保存しておく
-        if($request->contents_design_flg == 0){
+        if ($request->contents_design_flg == 0) {
             // TODO 画像用のサービスクラスを作成しておく事
             $top_image_file = $request->file('top_image');
             $top_image_file_name = 'top_image_' . time() . '_' . $top_image_file->getClientOriginalName(); // タイムスタンプ付きで保存
@@ -147,7 +151,7 @@ class BuildingController extends Controller
             // 画像の移動
             $old_path = 'tmp/';
             $new_path = 'building/' . $building->id . '/';
-            if(isset($request_data['top_image'])) {
+            if (isset($request_data['top_image'])) {
                 Storage::move($old_path . $request_data['top_image'], $new_path . $request_data['top_image']);
             }
             Storage::move($old_path . $request_data['thumbnail_image'], $new_path . $request_data['thumbnail_image']);

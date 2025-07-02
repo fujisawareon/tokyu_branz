@@ -4,15 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Http\Requests\Manager\ManagerUpdateRequest;
-use App\Models\Manager;
 use App\Models\MasterData;
-use App\Repositories\Interfaces\BuildingInvitationRepositoryInterface;
-use App\Repositories\Interfaces\ManagerRepositoryInterface;
 use App\Repositories\Interfaces\MasterDataRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
 
 class MasterDataService
 {
@@ -24,10 +18,10 @@ class MasterDataService
     }
 
     /**
+     * @return Collection<int, MasterData>
      */
     public function getMasterSalesScheduleData()
     {
         return $this->master_data_repository->getMasterDataByDataType(MasterData::SALES_SCHEDULE);
     }
-
 }
