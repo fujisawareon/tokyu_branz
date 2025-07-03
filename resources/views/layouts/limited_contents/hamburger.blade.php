@@ -14,26 +14,22 @@
 <div id="side_menu" class="side-menu  translate-x-full transition-transform">
     <div class="hamburger-menu close mb-4 text-left w-full flex-start-center gap-2" onclick="toggleMenu()">
         <div class="hamburger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         閉じる
     </div>
     <div class="mb-2">コンテンツを選択してください</div>
     <ul class="menu-list">
-        <li>
-            <a href="{{ route('contents_manager', ['building' => $building->id, 'page_name' => 'top']) }}">
-                トップ
-            </a>
-        </li>
-
-        @if($app_log_id)
-            @php $route_name = 'contents_customer'; @endphp
-        @else
+        @if($presentation_mode)
             @php $route_name = 'contents_manager'; @endphp
+        @else
+            @php $route_name = 'contents_customer'; @endphp
         @endif
-
+        <li>
+            <a href="{{ route($route_name, ['building' => $building->id, 'page_name' => 'top']) }}">トップ</a>
+        </li>
         @foreach($contents_menu as $page_name => $menu)
             <li>
                 <a href="{{ route($route_name, ['building' => $building->id, 'page_name' => $page_name]) }}">
