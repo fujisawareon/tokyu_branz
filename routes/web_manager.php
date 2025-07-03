@@ -20,6 +20,7 @@ use App\Http\Controllers\Manager\TestController;
 use App\Http\Controllers\Manager\LimitedContents\BinderController;
 use App\Http\Controllers\Manager\LimitedContents\BuildingMovieController;
 use App\Http\Controllers\Manager\LimitedContents\ImageGalleryController;
+use App\Http\Controllers\Manager\LimitedContents\FloorController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('manager')->group(function () {
@@ -108,6 +109,11 @@ Route::prefix('manager')->group(function () {
             Route::get('building_movie/{movie_type}', [BuildingMovieController::class, 'index'])->name('manager_project_building_movie');
             Route::post('building_movie_category_update/{movie_type}', [BuildingMovieController::class, 'categoryUpdate'])->name('building_movie_category_update');
             Route::post('building_movie_add/{movie_type}', [BuildingMovieController::class, 'addMovie'])->name('manager_project_building_movie_add');
+
+            Route::prefix('plan')->group(function () {
+                Route::get('', [FloorController::class, 'index'])->name('manager_project_plan');
+                Route::post('plan_update', [FloorController::class, 'updatePlan'])->name('manager_project_plan_update');
+            });
 
             Route::prefix('image_gallery')->group(function () {
                 Route::get('', [ImageGalleryController::class, 'index'])->name('manager_project_image_gallery');

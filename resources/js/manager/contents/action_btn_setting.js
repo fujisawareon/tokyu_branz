@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const $addBtn = $('#add_btn');
-    const $sortableList = $('#sortable-list');
+    const $sortableList = $('#sortable_list');
     const template = document.querySelector('#action-btn-template').innerHTML;
 
     // アクションボタンの数をカウントし、追加ボタンの表示を制御する

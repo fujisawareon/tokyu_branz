@@ -25,73 +25,82 @@
     </div>
 
     <div class="main-contents">
-        <div class="contents-area container">
+        <div class="container">
+            <div class="contents-area" style="width: 900px">
 
-            @include('layouts.manager.flash_message')
-            <div class="page-name">画像ギャラリー</div>
+                @include('layouts.manager.flash_message')
+                <div class="page-name">画像ギャラリー</div>
 
-            <div style="width: 850px">
-                <form method="POST" action="{{ route('manager_project_image_gallery_update', ['building' => $building->id]) }}">
-                    @csrf
-                    <div class="item-row">
-                        <div class="item-row-title">注釈文</div>
-                        <div class="item-row-content">
+                <div>
+                    <form method="POST"
+                          action="{{ route('manager_project_image_gallery_update', ['building' => $building->id]) }}">
+                        @csrf
+                        <div class="item-row">
+                            <div class="item-row-title">注釈文</div>
+                            <div class="item-row-content">
                             <textarea name="image_gallery_annotation" rows="4"
                                       class="input-box w-full">{{ old('message', ($building->buildingSetting->image_gallery_annotation)?? null) }}</textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item-row">
-                        <div class="item-row-title">画像一覧</div>
-                        <div class="item-row-content">
-                            <div>
-                                <div class="flex-center-center mb-2">
-                                    <button type="button" class="btn min" id="add_image_btn" onclick="">画像追加</button>
-                                </div>
-                                <div class="list-element mb-2">
-                                    <div class="list-element-header">
-                                        <div class="list-element-row">
-                                            <div style="width: 65px">並び順</div>
-                                            <div style="width: 300px">画像タイトル</div>
-                                            <div style="flex: 1">画像</div>
-                                            <div style="width: 65px">削除</div>
-                                        </div>
+                        <div class="item-row">
+                            <div class="item-row-title">画像一覧</div>
+                            <div class="item-row-content">
+                                <div>
+                                    <div class="flex-center-center mb-2">
+                                        <button type="button" class="btn min" id="add_image_btn" onclick="">画像追加
+                                        </button>
                                     </div>
-                                    <div class="" id="sortable-list">
-                                        @foreach($image_gallery_list as $image_gallery)
+                                    <div class="list-element mb-2">
+                                        <div class="list-element-header">
                                             <div class="list-element-row">
-                                                <div style="width: 65px; cursor: grab;" class="drag-handle flex-center-center">☰</div>
-                                                <div style="width: 300px" class="flex-center-center">
-                                                    <div class="w-full">
-                                                        <x-input-text type="text" name="title" class="w-full"
-                                                                      placeholder="画像タイトル"
-                                                                      :value="old('title', $image_gallery->title)"
-                                                                      :error="$errors->has('title')"/>
-                                                        <x-input-error :messages="$errors->get('title')" class="mt-1"/>
-                                                    </div>
-                                                </div>
-                                                <div style="flex: 1" class="">
-                                                    <div style="height: 100px; width: 150px;margin: 0 auto;">
-                                                        <img src="{{ Storage::url($building->id . '/image_gallery/thumbnail/' . $image_gallery->image_file_name) }}"
-                                                             alt="{{ $image_gallery->title }}"
-                                                            style="object-fit: cover;height: 100%; width: 100%;"
-                                                        >
-                                                    </div>
-                                                </div>
-                                                <div style="width: 65px" class="flex-center-center">
-                                                    <button type="button" class="btn min color-red delete-btn" data-id="{{ $image_gallery->id }}">削除</button>
-                                                </div>
+                                                <div style="width: 65px">並び順</div>
+                                                <div style="width: 300px">画像タイトル</div>
+                                                <div style="flex: 1">画像</div>
+                                                <div style="width: 65px">削除</div>
                                             </div>
-                                        @endforeach
+                                        </div>
+                                        <div class="" id="sortable_list">
+                                            @foreach($image_gallery_list as $image_gallery)
+                                                <div class="list-element-row">
+                                                    <div style="width: 65px; cursor: grab;"
+                                                         class="drag-handle flex-center-center">☰
+                                                    </div>
+                                                    <div style="width: 300px" class="flex-center-center">
+                                                        <div class="w-full">
+                                                            <x-input-text type="text" name="title" class="w-full"
+                                                                          placeholder="画像タイトル"
+                                                                          :value="old('title', $image_gallery->title)"
+                                                                          :error="$errors->has('title')"/>
+                                                            <x-input-error :messages="$errors->get('title')"
+                                                                           class="mt-1"/>
+                                                        </div>
+                                                    </div>
+                                                    <div style="flex: 1" class="">
+                                                        <div style="height: 100px; width: 150px;margin: 0 auto;">
+                                                            <img src="{{ Storage::url($building->id . '/image_gallery/thumbnail/' . $image_gallery->image_file_name) }}"
+                                                                 alt="{{ $image_gallery->title }}"
+                                                                 style="object-fit: cover;height: 100%; width: 100%;"
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 65px" class="flex-center-center">
+                                                        <button type="button" class="btn min color-red delete-btn"
+                                                                data-id="{{ $image_gallery->id }}">削除
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="flex-center-center">
-                        <input type="submit" class="btn" value="更新">
-                    </div>
-                </form>
+                        <div class="flex-center-center">
+                            <input type="submit" class="btn" value="更新">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

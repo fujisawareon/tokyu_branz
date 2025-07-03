@@ -42,8 +42,6 @@ return new class extends Migration
             $table->index(['building_id'], 'idx_building_setting_building_id');
         });
 
-
-
         Schema::create('building_setting_history', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('building_id')->comment('物件ID');
@@ -57,11 +55,10 @@ return new class extends Migration
             $table->string('building_site_url', 255)->default('')->comment('物件サイトURL');
             $table->boolean('building_site_display_flg')->comment('物件サイト表示フラグ');
 
-            $table->timestamp('original_created_at')->nullable()->comment('元の作成日時');
+            $table->timestamp('created_at')->comment('作成日時');
             $table->integer('created_by')->comment('作成者');
-            $table->timestamp('original_updated_at')->nullable()->comment('元の更新日時');
+            $table->timestamp('updated_at')->nullable()->comment('更新日時');
             $table->integer('updated_by')->nullable()->comment('更新者');
-            $table->timestamp('history_created_at')->useCurrent()->comment('履歴作成日時');
 
             // インデックス
             $table->index(['building_id'], 'idx_building_setting_history_building_id');
@@ -82,9 +79,9 @@ return new class extends Migration
                     max_interest_rate,
                     building_site_url,
                     building_site_display_flg,
-                    original_created_at,
+                    created_at,
                     created_by,
-                    original_updated_at,
+                    updated_at,
                     updated_by
                 ) VALUES (
                     OLD.building_id,

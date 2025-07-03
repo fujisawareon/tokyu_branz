@@ -18,7 +18,7 @@
                         <div style="width: 65px">削除</div>
                     </div>
                 </div>
-                <div class="" id="sortable-list">
+                <div class="" id="sortable_list">
                     @foreach($binder_building_category as $category)
                         <div class="list-element-row">
                             <input type="hidden" name="id[{{ $category->id }}]" value="{{ $category->id }}">

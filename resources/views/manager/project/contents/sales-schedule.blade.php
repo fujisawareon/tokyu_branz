@@ -41,7 +41,7 @@
                                 <div style="width: 65px">表示</div>
                             </div>
                         </div>
-                        <div class="" id="sortable-list">
+                        <div class="" id="sortable_list">
                             @foreach($sales_schedules as $sales_schedule)
                                 <div class="list-element-row">
                                     <div style="width: 65px; cursor: grab;" class="drag-handle text-center">☰</div>

@@ -18,7 +18,7 @@
                         <div style="width: 65px">削除</div>
                     </div>
                 </div>
-                <div class="" id="sortable-list">
+                <div class="" id="sortable_list">
                     @foreach($movie_list as $movie_category)
                         <div class="list-element-row">
 

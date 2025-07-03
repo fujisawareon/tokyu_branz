@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // カテゴリの行を追加
     $('#add_binder_category').on('click', () => {
         max_category_id += 1;
-        const sortableList = $('#sortable-list');
+        const sortableList = $('#sortable_list');
         const template = document.querySelector('#add_binder_category_template').innerHTML;
         const html = template.replace(/\${id}/g, max_category_id);
         sortableList.append(html);

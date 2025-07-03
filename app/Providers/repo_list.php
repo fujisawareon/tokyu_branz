@@ -39,6 +39,9 @@ return [
         'interface' => \App\Repositories\Interfaces\DisplayCustomerListColumnRepositoryInterface::class,
         'class' => \App\Repositories\DisplayCustomerListColumnRepository::class,
     ], [
+        'interface' => \App\Repositories\Interfaces\FloorTypeRepositoryInterface::class,
+        'class' => \App\Repositories\FloorTypeRepository::class,
+    ], [
         'interface' => \App\Repositories\Interfaces\ImageGalleryRepositoryInterface::class,
         'class' => \App\Repositories\ImageGalleryRepository::class,
     ], [

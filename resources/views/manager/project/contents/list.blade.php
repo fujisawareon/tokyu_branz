@@ -34,7 +34,7 @@
                 <a href="{{ route('manager_project_building_movie', ['building' => $building->id, 'movie_type' => 1]) }}">物件紹介動画</a>
                 <a href="{{ route('manager_project_building_movie', ['building' => $building->id, 'movie_type' => 2]) }}">マンション購入の<br>基礎知識編動画</a>
                 <a href="{{ route('manager_project_building_movie', ['building' => $building->id, 'movie_type' => 3]) }}">BRANZの管理と購入後の<br>サポート編動画</a>
-                <a href="">間取り</a>
+                <a href="{{ route('manager_project_plan', ['building' => $building->id]) }}">間取り</a>
                 <a href="" class="option">専有部VR</a>
                 <a href="" class="option">平面図眺望<br>シミュレーション</a>
                 <a href="" class="option">日影シミュレーション</a>
